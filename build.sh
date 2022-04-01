@@ -5,16 +5,16 @@ helm repo rm jenkins
 
 helm repo rm jenkinsci
 
-helm pull jenkinsci/jenkins --version 3.11.8
+helm pull jenkins/jenkins --version 3.11.8
 
-tar -zxvf jenkins-3.11.8.tgz -C helm-chart-sources/
+tar -zxvf jenkins-3.11.8.tgz -C charts/
 
-cp values.yaml helm-chart-sources/jenkins
+cp values.yaml charts/jenkins/
 
-helm package helm-chart-sources/*
+helm package charts/*
 
-helm repo index --url https://github.com/robinmordasiewicz/jenkins-helm .
+helm repo index --url https://github.com/robinmordasiewicz/helm-charts .
 
-helm repo add jenkins https://robinmordasiewicz.github.io/jenkins-helm/
+helm repo add jenkins https://robinmordasiewicz.github.io/helm-charts
 
-helm install jenkins -n r-mordasiewicz -f values.yaml jenkinsci/jenkins
+helm install jenkins -n r-mordasiewicz -f values.yaml jenkins/jenkins
