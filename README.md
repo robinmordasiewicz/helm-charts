@@ -1,4 +1,4 @@
-# helm-chart
+# helm-charts
 
 ## Usage
 
