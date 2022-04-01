@@ -17,4 +17,4 @@ helm repo index --url https://github.com/robinmordasiewicz/helm-charts .
 
 helm repo add jenkins https://robinmordasiewicz.github.io/helm-charts
 
-helm install jenkins -n r-mordasiewicz -f values.yaml jenkins/jenkins
+helm install jenkins -n r-mordasiewicz -f values.yaml robinmordasiewicz/jenkins
