@@ -1,7 +1,8 @@
 #!/bin/bash
 #
 
-CHARTVERSION='3.11.8'
+CHARTVERSION=`cat VERSION | sed -re "s/^([0-9]+\.[0-9]+\.[0-9]+)-*[0-9]*/\1/"`
+
 cat VERSION | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}' > VERSION.tmp && mv VERSION.tmp VERSION
 version=`cat VERSION`
 
@@ -9,8 +10,6 @@ version=`cat VERSION`
 rm jenkins-${CHARTVERSION}.tgz
 rm -rf charts/jenkins
 
-helm repo rm jenkins
-helm repo rm jenkinsci
 helm repo add jenkins https://charts.jenkins.io
 helm pull jenkins/jenkins --version ${CHARTVERSION}
 helm repo rm jenkins
