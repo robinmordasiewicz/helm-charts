@@ -27,7 +27,7 @@ helm repo rm jenkins
 
 helm repo rm jenkinsci
 
-helm repo add jenkins https://robinmordasiewicz.github.io/helm-charts
+#helm repo add jenkins https://robinmordasiewicz.github.io/helm-charts
 
 helm repo update
 
