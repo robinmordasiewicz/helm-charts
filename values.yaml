@@ -1,19 +1,12 @@
-
-
 clusterZone: "mordasiewicz.local"
-
 renderHelmLabels: true
-
 controller:
   jenkinsAdminEmail: r.mordasiewicz@f5.com
   componentName: "jenkins-controller"
-
   image: "robinhoodis/jenkins"
   tag: "2.332.1-21"
   tagLabel: 2.332.1-21
-
   imagePullPolicy: "Always"
-
   imagePullSecretName:
   lifecycle:
   disableRememberMe: true
@@ -22,7 +15,6 @@ controller:
   markupFormatter: plainText
   customJenkinsLabels: []
   adminSecret: true
-
   hostNetworking: false
   adminUser: "admin"
   admin:
@@ -80,13 +72,11 @@ controller:
         port: http
       periodSeconds: 10
       timeoutSeconds: 5
-
   podDisruptionBudget:
     enabled: false
     apiVersion: "policy/v1beta1"
     annotations: {}
     labels: {}
-
   agentListenerEnabled: true
   agentListenerPort: 50000
   agentListenerHostPort:
@@ -104,37 +94,22 @@ controller:
   agentListenerServiceType: "ClusterIP"
   agentListenerLoadBalancerIP:
   agentListenerServiceAnnotations: {}
-
-
   loadBalancerSourceRanges:
   - 0.0.0.0/0
   extraPorts: []
-
   installPlugins: []
-
   installLatestPlugins: true
-
   installLatestSpecifiedPlugins: true
-
   additionalPlugins: []
-
   initializeOnce: false
-
-
   overwritePluginsFromImage: true
-
   enableRawHtmlMarkupFormatter: false
   scriptApproval: []
   initScripts: []
-
   additionalExistingSecrets: []
-
   additionalSecrets: []
-
   secretClaims: []
-
   cloudName: "kubernetes"
-
   JCasC:
     defaultConfig: true
     configScripts:
@@ -206,7 +181,6 @@ controller:
       loggedInUsersCanDoAnything:
         allowAnonymousRead: false
   customInitContainers: []
-
   sidecars:
     configAutoReload:
       enabled: true
@@ -219,26 +193,18 @@ controller:
       containerSecurityContext:
         readOnlyRootFilesystem: true
         allowPrivilegeEscalation: false
-
     other: []
   schedulerName: ""
   nodeSelector: {}
-
   terminationGracePeriodSeconds:
-
   terminationMessagePath:
   terminationMessagePolicy:
-
   tolerations: []
-
   affinity: {}
   priorityClassName:
-
   podAnnotations: {}
   statefulSetAnnotations: {}
-
   updateStrategy: {}
-
   ingress:
     enabled: false
     paths: []
@@ -247,7 +213,6 @@ controller:
     annotations: {}
     hostName:
     tls:
-
   secondaryingress:
     enabled: false
     paths: []
@@ -256,7 +221,6 @@ controller:
     annotations: {}
     hostName:
     tls:
-
   backendconfig:
     enabled: false
     apiVersion: "extensions/v1beta1"
@@ -264,25 +228,12 @@ controller:
     labels: {}
     annotations: {}
     spec: {}
-
   route:
     enabled: false
     labels: {}
     annotations: {}
-
   hostAliases: []
-
-  prometheus:
-    enabled: false
-    serviceMonitorAdditionalLabels: {}
-    scrapeInterval: 60s
-    scrapeEndpoint: /prometheus
-    alertingRulesAdditionalLabels: {}
-    alertingrules: []
-    prometheusRuleNamespace: ""
-
   testEnabled: true
-
   httpsKeyStore:
     jenkinsHttpsJksSecretName: ''
     enable: false
@@ -331,7 +282,6 @@ controller:
         /MwpRxxazoda9r45kqQpyG+XoM4pB+Fd3JzMc4FUGxfVPxJU4jLawnJJiZ3vqiSyaB0YyUL+Er1Q
         6NnqtR4gEBF0ZVlQmkycFvD4EC2boP943dLqNUvop+4R3SM1QMM6P5u8iTXtHd/VN4MwMyy1wtog
         hYAzODo1Jt59pcqqKJEas0C/lFJEB3frw4ImNx5fNlJYOpx+ijfQs9m39CevDq0=
-
 agent:
   enabled: true
   defaultsProviderTemplate: ""
@@ -363,11 +313,9 @@ agent:
   podRetention: "Never"
   showRawYaml: true
   volumes: []
-
   workspaceVolume: {}
   envVars: []
   nodeSelector: {}
-
   command:
   args: "${computer.jnlpmac} ${computer.name}"
   sideContainerName: "jnlp"
@@ -379,11 +327,8 @@ agent:
   yamlMergeStrategy: "override"
   connectTimeout: 100
   annotations: {}
-
   podTemplates: {}
-
 additionalAgents: {}
-
 persistence:
   enabled: true
   existingClaim:
@@ -394,7 +339,6 @@ persistence:
   size: "20Gi"
   volumes:
   mounts:
-
 networkPolicy:
   enabled: false
   apiVersion: networking.k8s.io/v1
@@ -403,59 +347,17 @@ networkPolicy:
     podLabels: {}
     namespaceLabels: {}
   externalAgents: {}
-
 rbac:
   create: true
   readSecrets: false
-
 serviceAccount:
   create: true
   name:
   annotations: {}
   imagePullSecretName:
-
-
 serviceAccountAgent:
   create: true
   name:
   annotations: {}
   imagePullSecretName:
-
-backup:
-  enabled: false
-  componentName: "backup"
-  schedule: "0 2 * * *"
-  labels: {}
-  serviceAccount:
-    create: true
-    name:
-    annotations: {}
-  activeDeadlineSeconds: ""
-  image:
-    repository: "maorfr/kube-tasks"
-    tag: "0.2.0"
-  extraArgs: []
-  existingSecret: {}
-  env: []
-  resources:
-    requests:
-      memory: 1Gi
-      cpu: 1
-    limits:
-      memory: 1Gi
-      cpu: 1
-  destination: "s3://jenkins-data/backup"
-  onlyJobs: false
-  usePodSecurityContext: true
-  runAsUser: 1000
-  fsGroup: 1000
-  securityContextCapabilities: {}
 checkDeprecation: true
-
-awsSecurityGroupPolicies:
-  enabled: false
-  policies:
-    - name: ""
-      securityGroupIds: []
-      podSelector: {}
-
