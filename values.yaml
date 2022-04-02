@@ -381,6 +381,7 @@ controller:
                   }
                 }
               }
+          - script: >
               pipelineJob('integrate-deploy-docs') {
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/jcasc')
