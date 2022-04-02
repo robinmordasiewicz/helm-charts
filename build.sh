@@ -19,7 +19,9 @@ cp values.yaml charts/jenkins/
 
 helm package charts/*
 
-# helm repo index --url https://github.com/robinmordasiewicz/helm-charts .
+helm repo index --url https://github.com/robinmordasiewicz/helm-charts .
+
+git add . && git commit -m "creating skel" &&  git push
 
 helm repo add jenkins https://robinmordasiewicz.github.io/helm-charts
 
