@@ -247,7 +247,11 @@ controller:
   #   port: 9000
 
   # List of plugins to be install during Jenkins controller start
-  installPlugins: []
+  installPlugins:
+    - kubernetes:latest
+    - workflow-aggregator:latest
+    - git:latest
+    - configuration-as-code:latest
 
   # Set to false to download the minimum required version of all dependencies.
   installLatestPlugins: true
@@ -256,7 +260,29 @@ controller:
   installLatestSpecifiedPlugins: true
 
   # List of plugins to install in addition to those listed in controller.installPlugins
-  additionalPlugins: []
+  additionalPlugins:
+    - ansicolor:latest
+    - blueocean:latest
+    - cloudbees-folder:latest
+    - command-launcher:1.6
+    - email-ext:latest
+    - github-branch-source:latest
+    - gradle:latest
+    - groovy:latest
+    - jaxb:2.3.0.1
+    - jdk-tool:1.5
+    - job-dsl:latest
+    - kubernetes-cli:latest
+    - kubernetes-client-api:latest
+    - mailer:latest
+    - matrix-auth:latest
+    - pipeline-github-lib:latest
+    - pipeline-stage-view:latest
+    - role-strategy:latest
+    - script-security:latest
+    - workflow-cps:latest
+    - workflow-job:latest
+    - ws-cleanup:latest
 
   # Enable to initialize the Jenkins controller only once on initial installation.
   # Without this, whenever the controller gets restarted (Evicted, etc.) it will fetch plugin updates which has the potential to cause breakage.
@@ -326,64 +352,7 @@ controller:
     #      systemMessage: Welcome to our CI\CD server.  This Jenkins is configured and managed 'as code'.
     # Ignored if securityRealm is defined in controller.JCasC.configScripts and
     # ignored if controller.enableXmlConfig=true as controller.securityRealm takes precedence
-    configScripts:
-      custom-configs: |
-        unclassified:
-          gitSCM:
-            globalConfigEmail: "robin@mordasiewicz.com"
-            globalConfigName: "robinmordasiewicz"
-        jenkins:
-          systemMessage: "Pipeline Jobs"
-        jobs:
-          - script: >
-              pipelineJob('create-jenkins-container') {
-                properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/jenkins-pipeline')
-                  pipelineTriggers {
-                      triggers {
-                        githubPush()
-                      }
-                   }
-                }
-                definition {
-                  cpsScm {
-                    scm {
-                      git {
-                        remote {
-                          url('https://github.com/robinmordasiewicz/jenkins-pipeline.git')
-                        }
-                        branch('main')
-                        extensions {}
-                      }
-                    }
-                  }
-                }
-              }
-          - script: >
-              pipelineJob('create-nginx-container') {
-                properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/nginx-pipeline')
-                  pipelineTriggers {
-                      triggers {
-                        githubPush()
-                      }
-                   }
-                }
-                definition {
-                  cpsScm {
-                    scm {
-                      git {
-                        remote {
-                          url('https://github.com/robinmordasiewicz/nginx-pipeline.git')
-                        }
-                        branch('main')
-                        extensions {}
-                      }
-                    }
-                  }
-                }
-              }
-
+    configScripts: []
     securityRealm: |-
       local:
         allowsSignup: false
