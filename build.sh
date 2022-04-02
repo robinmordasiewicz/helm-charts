@@ -3,15 +3,16 @@
 
 CHARTVERSION='3.11.8'
 
-#helm repo rm jenkins
-#helm repo rm jenkinsci
-#helm repo add jenkins https://charts.jenkins.io
-#helm pull jenkins/jenkins --version ${CHARTVERSION}
-#helm repo rm jenkins
-#tar -zxvf jenkins-${CHARTVERSION}.tgz -C charts/
-#rm jenkins-${CHARTVERSION}.tgz
+helm repo rm jenkins
+helm repo rm jenkinsci
+helm repo add jenkins https://charts.jenkins.io
+helm pull jenkins/jenkins --version ${CHARTVERSION}
+helm repo rm jenkins
+tar -zxvf jenkins-${CHARTVERSION}.tgz -C charts/
+rm jenkins-${CHARTVERSION}.tgz
 
 rm index.yaml
+
 cp values.yaml charts/jenkins/
 
 cat VERSION | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}' > VERSION.tmp && mv VERSION.tmp VERSION
