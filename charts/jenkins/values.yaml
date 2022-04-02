@@ -358,9 +358,9 @@ controller:
           systemMessage: "Pipeline Jobs"
         jobs:
           - script: >
-              pipelineJob('update-jenkins') {
+              pipelineJob('create-jenkins-container') {
                 properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/jenkins')
+                  githubProjectUrl('https://github.com/robinmordasiewicz/jenkins-pipeline')
                   pipelineTriggers {
                       triggers {
                         githubPush()
@@ -372,7 +372,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/jenkins.git')
+                          url('https://github.com/robinmordasiewicz/jenkins-pipeline.git')
                         }
                         branch('main')
                         extensions {}
@@ -382,9 +382,9 @@ controller:
                 }
               }
           - script: >
-              pipelineJob('integrate-deploy-docs') {
+              pipelineJob('create-nginx-container') {
                 properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/jcasc')
+                  githubProjectUrl('https://github.com/robinmordasiewicz/nginx-pipeline')
                   pipelineTriggers {
                       triggers {
                         githubPush()
@@ -396,7 +396,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/jcasc.git')
+                          url('https://github.com/robinmordasiewicz/nginx-pipeline.git')
                         }
                         branch('main')
                         extensions {}
