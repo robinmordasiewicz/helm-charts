@@ -21,6 +21,8 @@ cat charts/jenkins/Chart.yaml | sed -re "s/^version: ([0-9]+\.[0-9]+\.[0-9]+)-*[
 
 helm package charts/*
 
+rm index.yaml
+
 helm repo index --url https://github.com/robinmordasiewicz/helm-charts .
 
 git add . && git commit -m "creating skel" &&  git push
