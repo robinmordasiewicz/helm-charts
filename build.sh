@@ -1,21 +1,29 @@
 #!/bin/bash
 #
 
+CHARTVERSION='3.11.8'
+
 helm repo rm jenkins
 
 helm repo rm jenkinsci
 
 helm repo add jenkins https://charts.jenkins.io
 
-helm pull jenkins/jenkins --version 3.11.8
+helm pull jenkins/jenkins --version ${CHARTVERSION}
 
 helm repo rm jenkins
 
-tar -zxvf jenkins-3.11.8.tgz -C charts/
+tar -zxvf jenkins-${CHARTVERSION}.tgz -C charts/
 
-rm jenkins-3.11.8.tgz
+rm jenkins-${CHARTVERSION}.tgz
 
 cp values.yaml charts/jenkins/
+
+cat VERSION | awk -F. -v OFS=. 'NF==1{print ++$NF}; NF>1{if(length($NF+1)>length($NF))$(NF-1)++; $NF=sprintf("%0*d", length($NF), ($NF+1)%(10^length($NF))); print}' > VERSION.tmp && mv VERSION.tmp VERSION
+
+version=`cat VERSION`
+
+cat charts/jenkins/Chart.yaml | sed -re "s/^version: ([0-9]+\.[0-9]+\.[0-9]+)/version: \1-${version}/" > charts/jenkins/Chart.yaml.tmp && mv charts/jenkins/Chart.yaml.tmp charts/jenkins/Chart.yaml
 
 helm package charts/*
 
