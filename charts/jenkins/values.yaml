@@ -21,8 +21,8 @@ controller:
   componentName: "jenkins-controller"
 
   image: "robinhoodis/jenkins"
-  tag: "2.332.1-19"
-  tagLabel: 2.332.1-19
+  tag: "2.332.1-21"
+  tagLabel: 2.332.1-21
 
 #  image: "jenkins/jenkins"
 #  # tag: "2.332.1-jdk11"
