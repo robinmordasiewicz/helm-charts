@@ -240,11 +240,7 @@ controller:
   #   port: 9000
 
   # List of plugins to be install during Jenkins controller start
-  installPlugins:
-    - kubernetes:latest
-    - workflow-aggregator:latest
-    - git:latest
-    - configuration-as-code:latest
+  installPlugins: []
 
   # Set to false to download the minimum required version of all dependencies.
   installLatestPlugins: true
@@ -253,29 +249,7 @@ controller:
   installLatestSpecifiedPlugins: true
 
   # List of plugins to install in addition to those listed in controller.installPlugins
-  additionalPlugins:
-    - ansicolor:latest
-    - blueocean:latest
-    - cloudbees-folder:latest
-    - command-launcher:1.6
-    - email-ext:latest
-    - github-branch-source:latest
-    - gradle:latest
-    - groovy:latest
-    - jaxb:2.3.0.1
-    - jdk-tool:1.5
-    - job-dsl:latest
-    - kubernetes-cli:latest
-    - kubernetes-client-api:latest
-    - mailer:latest
-    - matrix-auth:latest
-    - pipeline-github-lib:latest
-    - pipeline-stage-view:latest
-    - role-strategy:latest
-    - script-security:latest
-    - workflow-cps:latest
-    - workflow-job:latest
-    - ws-cleanup:latest
+  additionalPlugins: []
 
   # Enable to initialize the Jenkins controller only once on initial installation.
   # Without this, whenever the controller gets restarted (Evicted, etc.) it will fetch plugin updates which has the potential to cause breakage.
