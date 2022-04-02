@@ -1,29 +1,10 @@
 clusterZone: "mordasiewicz.local"
-renderHelmLabels: true
 controller:
   jenkinsAdminEmail: r.mordasiewicz@f5.com
-  componentName: "jenkins-controller"
   image: "robinhoodis/jenkins"
   tag: "2.332.1-21"
   tagLabel: 2.332.1-21
-  imagePullPolicy: "Always"
-  imagePullSecretName:
-  lifecycle:
   disableRememberMe: true
-  numExecutors: 0
-  executorMode: "NORMAL"
-  markupFormatter: plainText
-  customJenkinsLabels: []
-  adminSecret: true
-  hostNetworking: false
-  adminUser: "admin"
-  admin:
-    existingSecret: ""
-    userKey: jenkins-admin-user
-    passwordKey: jenkins-admin-password
-  jenkinsHome: "/var/jenkins_home"
-  jenkinsRef: "/usr/share/jenkins/ref"
-  jenkinsWar: "/usr/share/jenkins/jenkins.war"
   resources:
     requests:
       cpu: "200m"
@@ -32,84 +13,8 @@ controller:
       cpu: "2000m"
       memory: "4096Mi"
   jenkinsUrl: http://jenkins.f5.mordasiewicz.com:8080
-  usePodSecurityContext: true
-  runAsUser: 1000
-  fsGroup: 1000
-  securityContextCapabilities: {}
-  containerSecurityContext:
-    runAsUser: 1000
-    runAsGroup: 1000
-    readOnlyRootFilesystem: true
-    allowPrivilegeEscalation: false
-  servicePort: 8080
-  targetPort: 8080
-  serviceType: ClusterIP
-  serviceExternalTrafficPolicy:
-  serviceAnnotations: {}
-  statefulSetLabels: {}
-  serviceLabels: {}
-  podLabels: {}
-  healthProbes: true
-  probes:
-    startupProbe:
-      httpGet:
-        path: '{{ default "" .Values.controller.jenkinsUriPrefix }}/login'
-        port: http
-      periodSeconds: 10
-      timeoutSeconds: 5
-      failureThreshold: 12
-    livenessProbe:
-      failureThreshold: 5
-      httpGet:
-        path: '{{ default "" .Values.controller.jenkinsUriPrefix }}/login'
-        port: http
-      periodSeconds: 10
-      timeoutSeconds: 5
-    readinessProbe:
-      failureThreshold: 3
-      httpGet:
-        path: '{{ default "" .Values.controller.jenkinsUriPrefix }}/login'
-        port: http
-      periodSeconds: 10
-      timeoutSeconds: 5
-  podDisruptionBudget:
-    enabled: false
-    apiVersion: "policy/v1beta1"
-    annotations: {}
-    labels: {}
-  agentListenerEnabled: true
-  agentListenerPort: 50000
-  agentListenerHostPort:
-  agentListenerNodePort:
-  agentListenerExternalTrafficPolicy:
-  agentListenerLoadBalancerSourceRanges:
-  - 0.0.0.0/0
-  disabledAgentProtocols:
-    - JNLP-connect
-    - JNLP2-connect
-  csrf:
-    defaultCrumbIssuer:
-      enabled: true
-      proxyCompatability: true
-  agentListenerServiceType: "ClusterIP"
-  agentListenerLoadBalancerIP:
-  agentListenerServiceAnnotations: {}
-  loadBalancerSourceRanges:
-  - 0.0.0.0/0
-  extraPorts: []
   installPlugins: []
-  installLatestPlugins: true
   installLatestSpecifiedPlugins: true
-  additionalPlugins: []
-  initializeOnce: false
-  overwritePluginsFromImage: true
-  enableRawHtmlMarkupFormatter: false
-  scriptApproval: []
-  initScripts: []
-  additionalExistingSecrets: []
-  additionalSecrets: []
-  secretClaims: []
-  cloudName: "kubernetes"
   JCasC:
     defaultConfig: true
     configScripts:
@@ -180,128 +85,9 @@ controller:
     authorizationStrategy: |-
       loggedInUsersCanDoAnything:
         allowAnonymousRead: false
-  customInitContainers: []
-  sidecars:
-    configAutoReload:
-      enabled: true
-      image: kiwigrid/k8s-sidecar:1.15.0
-      imagePullPolicy: IfNotPresent
-      resources: {}
-      reqRetryConnect: 10
-      sshTcpPort: 1044
-      folder: "/var/jenkins_home/casc_configs"
-      containerSecurityContext:
-        readOnlyRootFilesystem: true
-        allowPrivilegeEscalation: false
-    other: []
-  schedulerName: ""
-  nodeSelector: {}
-  terminationGracePeriodSeconds:
-  terminationMessagePath:
-  terminationMessagePolicy:
-  tolerations: []
-  affinity: {}
-  priorityClassName:
-  podAnnotations: {}
-  statefulSetAnnotations: {}
-  updateStrategy: {}
-  ingress:
-    enabled: false
-    paths: []
-    apiVersion: "extensions/v1beta1"
-    labels: {}
-    annotations: {}
-    hostName:
-    tls:
-  secondaryingress:
-    enabled: false
-    paths: []
-    apiVersion: "extensions/v1beta1"
-    labels: {}
-    annotations: {}
-    hostName:
-    tls:
-  backendconfig:
-    enabled: false
-    apiVersion: "extensions/v1beta1"
-    name:
-    labels: {}
-    annotations: {}
-    spec: {}
-  route:
-    enabled: false
-    labels: {}
-    annotations: {}
-  hostAliases: []
-  testEnabled: true
-  httpsKeyStore:
-    jenkinsHttpsJksSecretName: ''
-    enable: false
-    httpPort: 8081
-    path: "/var/jenkins_keystore"
-    fileName: "keystore.jks"
-    password: "password"
-    jenkinsKeyStoreBase64Encoded: |
-        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
 agent:
-  enabled: true
-  defaultsProviderTemplate: ""
   jenkinsUrl: http://jenkins:8080
   jenkinsTunnel: jenkins-agent:50000
-  kubernetesConnectTimeout: 5
-  kubernetesReadTimeout: 15
-  maxRequestsPerHostStr: "32"
-  namespace:
-  image: "jenkins/inbound-agent"
-  tag: "4.11.2-4"
-  workingDir: "/home/jenkins/agent"
-  nodeUsageMode: "NORMAL"
-  customJenkinsLabels: []
-  imagePullSecretName:
-  componentName: "jenkins-agent"
-  websocket: false
-  privileged: false
-  runAsUser:
-  runAsGroup:
   resources:
     requests:
       cpu: "2048m"
@@ -309,55 +95,9 @@ agent:
     limits:
       cpu: "2048m"
       memory: "2048Mi"
-  alwaysPullImage: true
-  podRetention: "Never"
-  showRawYaml: true
-  volumes: []
-  workspaceVolume: {}
-  envVars: []
-  nodeSelector: {}
-  command:
-  args: "${computer.jnlpmac} ${computer.name}"
-  sideContainerName: "jnlp"
-  TTYEnabled: false
-  containerCap: 10
   podName: "jenkins-agent"
-  idleMinutes: 0
-  yamlTemplate: ""
-  yamlMergeStrategy: "override"
-  connectTimeout: 100
-  annotations: {}
-  podTemplates: {}
-additionalAgents: {}
 persistence:
-  enabled: true
-  existingClaim:
-  storageClass:
-  annotations: {}
-  labels: {}
-  accessMode: "ReadWriteOnce"
   size: "20Gi"
-  volumes:
-  mounts:
-networkPolicy:
-  enabled: false
-  apiVersion: networking.k8s.io/v1
-  internalAgents:
-    allowed: true
-    podLabels: {}
-    namespaceLabels: {}
-  externalAgents: {}
 rbac:
   create: true
-  readSecrets: false
-serviceAccount:
-  create: true
-  name:
-  annotations: {}
-  imagePullSecretName:
-serviceAccountAgent:
-  create: true
-  name:
-  annotations: {}
-  imagePullSecretName:
 checkDeprecation: true
