@@ -355,9 +355,32 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "Jenkins CI Pipeline"
+          systemMessage: "Pipeline Jobs"
         jobs:
           - script: >
+              pipelineJob('update-jenkins') {
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/jenkins')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/jenkins.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
               pipelineJob('integrate-deploy-docs') {
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/jcasc')
