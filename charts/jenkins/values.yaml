@@ -20,13 +20,13 @@ controller:
   # Used for label app.kubernetes.io/component
   componentName: "jenkins-controller"
 
-  # image: "robinhoodis/jenkins"
-  # tag: "2.332.1-14"
-  # tagLabel: 2.332.1-14
+  image: "robinhoodis/jenkins"
+  tag: "2.332.1-15"
+  tagLabel: 2.332.1-15
 
-  image: "jenkins/jenkins"
-  # tag: "2.332.1-jdk11"
-  tagLabel: jdk11
+#  image: "jenkins/jenkins"
+#  # tag: "2.332.1-jdk11"
+#  tagLabel: jdk11
 
   imagePullPolicy: "Always"
 
@@ -352,7 +352,7 @@ controller:
     #      systemMessage: Welcome to our CI\CD server.  This Jenkins is configured and managed 'as code'.
     # Ignored if securityRealm is defined in controller.JCasC.configScripts and
     # ignored if controller.enableXmlConfig=true as controller.securityRealm takes precedence
-    configScripts: []
+    configScripts: {}
     securityRealm: |-
       local:
         allowsSignup: false
