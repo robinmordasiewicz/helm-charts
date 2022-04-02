@@ -34,6 +34,6 @@ helm repo add robinmordasiewicz https://robinmordasiewicz.github.io/helm-charts
 
 helm repo update
 
-helm search repo jenkins
+helm search repo robinmordasiewicz
 
 # helm install jenkins -n r-mordasiewicz -f values.yaml robinmordasiewicz/jenkins
