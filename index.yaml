@@ -44,5 +44,5 @@ entries:
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
     - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8.tgz
-    version: 3.11.8
+    version: 3.11.8-1
 generated: "2022-04-01T13:07:34.795057-04:00"
