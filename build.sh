@@ -23,6 +23,8 @@ helm package charts/*
 
 helm repo add jenkins https://robinmordasiewicz.github.io/helm-charts
 
+helm repo update
+
 helm search repo jenkins
 
 # helm install jenkins -n r-mordasiewicz -f values.yaml robinmordasiewicz/jenkins
