@@ -11,17 +11,25 @@
 
 # For FQDN resolving of the controller service. Change this value to match your existing configuration.
 # ref: https://github.com/kubernetes/dns/blob/master/docs/specification.md
-clusterZone: "cluster.local"
+clusterZone: "mordasiewicz.local"
 
 renderHelmLabels: true
 
 controller:
+  jenkinsAdminEmail: r.mordasiewicz@f5.com
   # Used for label app.kubernetes.io/component
   componentName: "jenkins-controller"
+
+  # image: "robinhoodis/jenkins"
+  # tag: "2.332.1-14"
+  # tagLabel: 2.332.1-14
+
   image: "jenkins/jenkins"
   # tag: "2.332.1-jdk11"
   tagLabel: jdk11
+
   imagePullPolicy: "Always"
+
   imagePullSecretName:
   # Optionally configure lifetime for controller-container
   lifecycle:
@@ -30,7 +38,7 @@ controller:
   #      command:
   #      - "uname"
   #      - "-a"
-  disableRememberMe: false
+  disableRememberMe: true
   numExecutors: 0
   # configures the executor mode of the Jenkins node. Possible values are: NORMAL or EXCLUSIVE
   executorMode: "NORMAL"
@@ -64,8 +72,8 @@ controller:
   #   - --httpPort=8080
   resources:
     requests:
-      cpu: "50m"
-      memory: "256Mi"
+      cpu: "200m"
+      memory: "512Mi"
     limits:
       cpu: "2000m"
       memory: "4096Mi"
@@ -92,6 +100,8 @@ controller:
   # jenkinsUrlProtocol: "https"
   # If you are not using the provided ingress you can specify `controller.jenkinsUrl` to change the url definition.
   # jenkinsUrl: ""
+  jenkinsUrl: http://jenkins.f5.mordasiewicz.com:8080
+  # jenkinsUrl: http://jenkins:8080
   # If you set this prefix and use ingress controller then you might want to set the ingress path below
   # jenkinsUriPrefix: "/jenkins"
   # Enable pod security context (must be `true` if podSecurityContextOverride, runAsUser or fsGroup are set)
@@ -237,17 +247,13 @@ controller:
   #   port: 9000
 
   # List of plugins to be install during Jenkins controller start
-  installPlugins:
-    - kubernetes:1.31.3
-    - workflow-aggregator:2.6
-    - git:4.10.2
-    - configuration-as-code:1.55.1
+  installPlugins: []
 
   # Set to false to download the minimum required version of all dependencies.
   installLatestPlugins: true
 
   # Set to true to download latest dependencies of any plugin that is requested to have the latest version.
-  installLatestSpecifiedPlugins: false
+  installLatestSpecifiedPlugins: true
 
   # List of plugins to install in addition to those listed in controller.installPlugins
   additionalPlugins: []
@@ -314,12 +320,70 @@ controller:
   # etc.  Best reference is https://<jenkins_url>/configuration-as-code/reference.  The example below creates a welcome message:
   JCasC:
     defaultConfig: true
-    configScripts: {}
+    #configScripts: {}
     #  welcome-message: |
     #    jenkins:
     #      systemMessage: Welcome to our CI\CD server.  This Jenkins is configured and managed 'as code'.
     # Ignored if securityRealm is defined in controller.JCasC.configScripts and
     # ignored if controller.enableXmlConfig=true as controller.securityRealm takes precedence
+    configScripts:
+      custom-configs: |
+        unclassified:
+          gitSCM:
+            globalConfigEmail: "robin@mordasiewicz.com"
+            globalConfigName: "robinmordasiewicz"
+        jenkins:
+          systemMessage: "Pipeline Jobs"
+        jobs:
+          - script: >
+              pipelineJob('create-jenkins-container') {
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/jenkins-pipeline')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/jenkins-pipeline.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('create-nginx-container') {
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/nginx-pipeline')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/nginx-pipeline.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
+
     securityRealm: |-
       local:
         allowsSignup: false
@@ -582,9 +646,9 @@ agent:
   enabled: true
   defaultsProviderTemplate: ""
   # URL for connecting to the Jenkins contoller
-  jenkinsUrl:
+  jenkinsUrl: http://jenkins:8080
   # connect to the specified host and port, instead of connecting directly to the Jenkins controller
-  jenkinsTunnel:
+  jenkinsTunnel: jenkins-agent:50000
   kubernetesConnectTimeout: 5
   kubernetesReadTimeout: 15
   maxRequestsPerHostStr: "32"
@@ -603,13 +667,13 @@ agent:
   runAsGroup:
   resources:
     requests:
-      cpu: "512m"
-      memory: "512Mi"
+      cpu: "2048m"
+      memory: "2048Mi"
     limits:
-      cpu: "512m"
-      memory: "512Mi"
+      cpu: "2048m"
+      memory: "2048Mi"
   # You may want to change this to true while testing a new image
-  alwaysPullImage: false
+  alwaysPullImage: true
   # Controls how agent pods are retained after the Jenkins build completes
   # Possible values: Always, Never, OnFailure
   podRetention: "Never"
@@ -688,7 +752,7 @@ agent:
   # Max number of spawned agent
   containerCap: 10
   # Pod name
-  podName: "default"
+  podName: "jenkins-agent"
   # Allows the Pod to remain active for reuse until the configured number of
   # minutes has passed since the last step was executed on it.
   idleMinutes: 0
@@ -719,21 +783,21 @@ agent:
   # controller.JCasC.defaultConfig: true
   # Best reference is https://<jenkins_url>/configuration-as-code/reference#Cloud-kubernetes. The example below creates a python pod template.
   podTemplates: {}
-  #  python: |
-  #    - name: python
-  #      label: jenkins-python
-  #      serviceAccount: jenkins
-  #      containers:
-  #        - name: python
-  #          image: python:3
-  #          command: "/bin/sh -c"
-  #          args: "cat"
-  #          ttyEnabled: true
-  #          privileged: true
-  #          resourceRequestCpu: "400m"
-  #          resourceRequestMemory: "512Mi"
-  #          resourceLimitCpu: "1"
-  #          resourceLimitMemory: "1024Mi"
+#    python: |
+#      - name: python
+#        label: jenkins-python
+#        serviceAccount: jenkins
+#        containers:
+#          - name: python
+#            image: python:3
+#            command: "/bin/sh -c"
+#            args: "cat"
+#            ttyEnabled: true
+#            privileged: true
+#            resourceRequestCpu: "400m"
+#            resourceRequestMemory: "512Mi"
+#            resourceLimitCpu: "1"
+#            resourceLimitMemory: "1024Mi"
 
 # Here you can add additional agents
 # They inherit all values from `agent` so you only need to specify values which differ
@@ -772,7 +836,7 @@ persistence:
   annotations: {}
   labels: {}
   accessMode: "ReadWriteOnce"
-  size: "8Gi"
+  size: "20Gi"
   volumes:
   #  - name: nothing
   #    emptyDir: {}
@@ -813,7 +877,7 @@ serviceAccount:
 
 serviceAccountAgent:
   # Specifies whether a ServiceAccount should be created
-  create: false
+  create: true
   # The name of the ServiceAccount to use.
   # If not set and create is true, a name is generated using the fullname template
   name:
@@ -894,3 +958,4 @@ awsSecurityGroupPolicies:
     - name: ""
       securityGroupIds: []
       podSelector: {}
+
