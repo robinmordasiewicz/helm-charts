@@ -23,6 +23,10 @@ helm repo index --url https://github.com/robinmordasiewicz/helm-charts .
 
 git add . && git commit -m "creating skel" &&  git push
 
+helm repo rm jenkins
+
+helm repo rm jenkinsci
+
 helm repo add jenkins https://robinmordasiewicz.github.io/helm-charts
 
 helm repo update
