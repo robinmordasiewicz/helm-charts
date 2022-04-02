@@ -18,7 +18,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.416456-04:00"
+    created: "2022-04-01T23:47:20.78338-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -43,7 +43,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8.tgz
     version: 3.11.8
   - annotations:
       artifacthub.io/images: |
@@ -62,7 +62,51 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.413345-04:00"
+    created: "2022-04-01T23:47:20.778901-04:00"
+    description: Jenkins - Build great things at any scale! The leading open source
+      automation server, Jenkins provides hundreds of plugins to support building,
+      deploying and automating any project.
+    digest: 99db85a4a1cfaf0e1de2212b41f9d8aafd63a38b55518fb18f325aa39c8b1e9d
+    home: https://jenkins.io/
+    icon: https://get.jenkins.io/art/jenkins-logo/logo.svg
+    maintainers:
+    - email: maor.friedman@redhat.com
+      name: maorfr
+    - email: mail@torstenwalter.de
+      name: torstenwalter
+    - email: garridomota@gmail.com
+      name: mogaal
+    - email: wmcdona89@gmail.com
+      name: wmcdona89
+    - email: timjacomb1@gmail.com
+      name: timja
+    name: jenkins
+    sources:
+    - https://github.com/jenkinsci/jenkins
+    - https://github.com/jenkinsci/docker-inbound-agent
+    - https://github.com/maorfr/kube-tasks
+    - https://github.com/jenkinsci/configuration-as-code-plugin
+    urls:
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-42.tgz
+    version: 3.11.8-42
+  - annotations:
+      artifacthub.io/images: |
+        - name: jenkins
+          image: jenkins/jenkins:2.332.1-jdk11
+        - name: k8s-sidecar
+          image: kiwigrid/k8s-sidecar:1.15.0
+        - name: inbound-agent
+          image: jenkins/inbound-agent:4.11.2-4
+        - name: backup
+          image: maorfr/kube-tasks:0.2.0
+      artifacthub.io/links: |
+        - name: Chart Source
+          url: https://github.com/jenkinsci/helm-charts/tree/main/charts/jenkins
+        - name: Jenkins
+          url: https://www.jenkins.io/
+    apiVersion: v2
+    appVersion: 2.332.1
+    created: "2022-04-01T23:47:20.775711-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -87,7 +131,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-41.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-41.tgz
     version: 3.11.8-41
   - annotations:
       artifacthub.io/images: |
@@ -106,7 +150,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.410135-04:00"
+    created: "2022-04-01T23:47:20.772645-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -131,7 +175,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-40.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-40.tgz
     version: 3.11.8-40
   - annotations:
       artifacthub.io/images: |
@@ -150,7 +194,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.405206-04:00"
+    created: "2022-04-01T23:47:20.768777-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -175,7 +219,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-39.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-39.tgz
     version: 3.11.8-39
   - annotations:
       artifacthub.io/images: |
@@ -194,7 +238,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.401202-04:00"
+    created: "2022-04-01T23:47:20.765312-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -219,7 +263,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-38.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-38.tgz
     version: 3.11.8-38
   - annotations:
       artifacthub.io/images: |
@@ -238,7 +282,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.396425-04:00"
+    created: "2022-04-01T23:47:20.761498-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -263,7 +307,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-37.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-37.tgz
     version: 3.11.8-37
   - annotations:
       artifacthub.io/images: |
@@ -282,7 +326,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.392234-04:00"
+    created: "2022-04-01T23:47:20.758314-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -307,7 +351,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-36.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-36.tgz
     version: 3.11.8-36
   - annotations:
       artifacthub.io/images: |
@@ -326,7 +370,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.388355-04:00"
+    created: "2022-04-01T23:47:20.755118-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -351,7 +395,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-34.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-34.tgz
     version: 3.11.8-34
   - annotations:
       artifacthub.io/images: |
@@ -370,7 +414,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.383998-04:00"
+    created: "2022-04-01T23:47:20.751133-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -395,7 +439,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-33.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-33.tgz
     version: 3.11.8-33
   - annotations:
       artifacthub.io/images: |
@@ -414,7 +458,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.380189-04:00"
+    created: "2022-04-01T23:47:20.747811-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -439,7 +483,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-32.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-32.tgz
     version: 3.11.8-32
   - annotations:
       artifacthub.io/images: |
@@ -458,7 +502,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.375009-04:00"
+    created: "2022-04-01T23:47:20.743795-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -483,7 +527,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-31.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-31.tgz
     version: 3.11.8-31
   - annotations:
       artifacthub.io/images: |
@@ -502,7 +546,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.37042-04:00"
+    created: "2022-04-01T23:47:20.740577-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -527,7 +571,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-30.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-30.tgz
     version: 3.11.8-30
   - annotations:
       artifacthub.io/images: |
@@ -546,7 +590,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.366153-04:00"
+    created: "2022-04-01T23:47:20.736439-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -571,7 +615,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-29.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-29.tgz
     version: 3.11.8-29
   - annotations:
       artifacthub.io/images: |
@@ -590,7 +634,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.360955-04:00"
+    created: "2022-04-01T23:47:20.733114-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -615,7 +659,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-27.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-27.tgz
     version: 3.11.8-27
   - annotations:
       artifacthub.io/images: |
@@ -634,7 +678,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.356258-04:00"
+    created: "2022-04-01T23:47:20.729402-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -659,7 +703,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-26.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-26.tgz
     version: 3.11.8-26
   - annotations:
       artifacthub.io/images: |
@@ -678,7 +722,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.350906-04:00"
+    created: "2022-04-01T23:47:20.724953-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -703,7 +747,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-25.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-25.tgz
     version: 3.11.8-25
   - annotations:
       artifacthub.io/images: |
@@ -722,7 +766,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.346321-04:00"
+    created: "2022-04-01T23:47:20.721572-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -747,7 +791,7 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-24.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-24.tgz
     version: 3.11.8-24
   - annotations:
       artifacthub.io/images: |
@@ -766,7 +810,7 @@ entries:
           url: https://www.jenkins.io/
     apiVersion: v2
     appVersion: 2.332.1
-    created: "2022-04-01T23:41:38.340154-04:00"
+    created: "2022-04-01T23:47:20.717129-04:00"
     description: Jenkins - Build great things at any scale! The leading open source
       automation server, Jenkins provides hundreds of plugins to support building,
       deploying and automating any project.
@@ -791,6 +835,6 @@ entries:
     - https://github.com/maorfr/kube-tasks
     - https://github.com/jenkinsci/configuration-as-code-plugin
     urls:
-    - https://github.com/robinmordasiewicz/helm-charts/jenkins-3.11.8-23.tgz
+    - https://robinmordasiewicz.github.io/helm-charts/jenkins-3.11.8-23.tgz
     version: 3.11.8-23
-generated: "2022-04-01T23:41:38.332264-04:00"
+generated: "2022-04-01T23:47:20.713172-04:00"
