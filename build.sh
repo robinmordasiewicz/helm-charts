@@ -3,15 +3,15 @@
 
 CHARTVERSION='3.11.8'
 
+rm index.yaml
+rm jenkins-${CHARTVERSION}.tgz
+rm -rf charts/jenkins
 helm repo rm jenkins
 helm repo rm jenkinsci
 helm repo add jenkins https://charts.jenkins.io
 helm pull jenkins/jenkins --version ${CHARTVERSION}
 helm repo rm jenkins
 tar -zxvf jenkins-${CHARTVERSION}.tgz -C charts/
-rm jenkins-${CHARTVERSION}.tgz
-
-rm index.yaml
 
 cp values.yaml charts/jenkins/
 
