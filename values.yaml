@@ -18,11 +18,18 @@ renderHelmLabels: true
 controller:
   jenkinsAdminEmail: r.mordasiewicz@f5.com
   # Used for label app.kubernetes.io/component
-  # componentName: "jenkins-controller"
-  image: "robinhoodis/jenkins"
-  tag: "2.332.1-14"
-  tagLabel: 2.332.1-14
+  componentName: "jenkins-controller"
+
+  # image: "robinhoodis/jenkins"
+  # tag: "2.332.1-14"
+  # tagLabel: 2.332.1-14
+
+  image: "jenkins/jenkins"
+  # tag: "2.332.1-jdk11"
+  tagLabel: jdk11
+
   imagePullPolicy: "Always"
+
   imagePullSecretName:
   # Optionally configure lifetime for controller-container
   lifecycle:
