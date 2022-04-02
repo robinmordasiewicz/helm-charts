@@ -5,9 +5,13 @@ helm repo rm jenkins
 
 helm repo rm jenkinsci
 
+helm repo add jenkins https://charts.jenkins.io
+
 helm pull jenkins/jenkins --version 3.11.8
 
 tar -zxvf jenkins-3.11.8.tgz -C charts/
+
+rm jenkins-3.11.8.tgz
 
 cp values.yaml charts/jenkins/
 
