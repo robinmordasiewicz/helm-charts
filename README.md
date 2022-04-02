@@ -15,3 +15,14 @@ To install the jenkins chart:
 To uninstall the chart:
 
     helm delete jenkins
+
+
+## manual install
+ 
+   helm repo remove robinmordasiewicz
+
+   helm repo add jenkins https://charts.jenkins.io
+
+   helm repo update
+
+   helm install jenkins -n r-mordasiewicz -f values.yaml jenkins/jenkins
