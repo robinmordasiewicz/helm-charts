@@ -2,8 +2,8 @@ clusterZone: "mordasiewicz.local"
 controller:
   jenkinsAdminEmail: r.mordasiewicz@f5.com
   image: "robinhoodis/jenkins"
-  tag: "2.332.1-41"
-  tagLabel: 2.332.1-41
+  tag: "2.332.1-44"
+  tagLabel: 2.332.1-44
   disableRememberMe: true
   resources:
     requests:
@@ -98,6 +98,5 @@ agent:
   podName: "jenkins-agent"
 persistence:
   size: "20Gi"
-rbac:
+serviceAccountAgent:
   create: true
-checkDeprecation: true
