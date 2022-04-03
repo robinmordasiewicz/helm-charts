@@ -13,7 +13,6 @@ controller:
       cpu: "2000m"
       memory: "4096Mi"
   jenkinsUrl: http://jenkins.f5.mordasiewicz.com:8080
-  installPlugins: []
   installLatestSpecifiedPlugins: true
   JCasC:
     defaultConfig: true
