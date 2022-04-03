@@ -5,6 +5,10 @@ controller:
   tag: "2.332.1-50"
   tagLabel: 2.332.1-50
   disableRememberMe: true
+  primaryView:
+    all:
+      description: "version: 50"
+      name: "all"
   resources:
     requests:
       cpu: "200m"
