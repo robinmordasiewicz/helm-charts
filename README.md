@@ -1,5 +1,7 @@
 # helm-charts
 
+https://lippertmarkus.com/2020/08/13/chartreleaser/
+
 ## Usage
 
   helm repo add robinmordasiewicz https://robinmordasiewicz.github.io/helm-charts
