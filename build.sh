@@ -14,6 +14,7 @@ else
   mkdir tmp
 fi
 
+helm repo rm jenkins || true
 helm repo add jenkins https://charts.jenkins.io
 helm pull jenkins/jenkins --version ${CHARTVERSION} -d tmp/
 helm repo rm jenkins
@@ -33,6 +34,4 @@ then
   rm -rf tmp
 fi
 
-#helm repo index --url https://robinmordasiewicz.github.io/helm-charts .
 helm repo index --url https://robinmordasiewicz.github.io/helm-charts .
-
