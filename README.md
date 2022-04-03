@@ -13,4 +13,3 @@ robinmordasiewicz` to see the charts.
 To install the jenkins chart:
 
     helm install jenkins robinmordasiewicz/jenkins
-
