@@ -27,11 +27,11 @@ cat tmp/jenkins/Chart.yaml | sed -re "s/^version: [0-9]+\.[0-9]+\.[0-9]+-*[0-9]*
 
 helm lint tmp/jenkins/ -f tmp/jenkins/custom-values.yaml --strict
 
-(cd -- "tmp" && helm package jenkins --version "${CHARTVERSION}-${LOCALREVISION}" -d ../ --app-version ${CONTAINERVERSION} )
+(cd -- "tmp" && helm package jenkins --version "${CHARTVERSION}-${LOCALREVISION}" -d ../charts --app-version ${CONTAINERVERSION} )
 
 if [ -d tmp ]
 then
   rm -rf tmp
 fi
 
-helm repo index --url https://robinmordasiewicz.github.io/helm-charts .
+(cd -- "charts" && helm repo index --url https://robinmordasiewicz.github.io/helm-charts . )
