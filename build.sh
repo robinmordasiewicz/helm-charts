@@ -14,20 +14,27 @@ else
   mkdir tmp
 fi
 
+if [ -d charts/jenkins ]
+then
+  rm -rf charts/jenkins && mkdir charts/jenkins
+else
+  mkdir charts/jenkins
+fi
+
 helm repo rm jenkins || true
 helm repo add jenkins https://charts.jenkins.io
-helm pull jenkins/jenkins --version ${CHARTVERSION} -d tmp/
+helm pull jenkins/jenkins --version ${CHARTVERSION} -d charts/
 helm repo rm jenkins
 
-tar -zxvf tmp/jenkins-${CHARTVERSION}.tgz -C tmp/
+tar -zxvf charts/jenkins-${CHARTVERSION}.tgz -C charts/
 
-cp custom-values.yaml tmp/jenkins/
+cp custom-values.yaml charts/jenkins/
 
-cat tmp/jenkins/Chart.yaml | sed -re "s/^version: [0-9]+\.[0-9]+\.[0-9]+-*[0-9]*/version: ${CHARTVERSION}-${LOCALREVISION}/" > tmp/jenkins/Chart.yaml.tmp && mv tmp/jenkins/Chart.yaml.tmp tmp/jenkins/Chart.yaml
+cat charts/jenkins/Chart.yaml | sed -re "s/^version: [0-9]+\.[0-9]+\.[0-9]+-*[0-9]*/version: ${CHARTVERSION}-${LOCALREVISION}/" > charts/jenkins/Chart.yaml.tmp && mv charts/jenkins/Chart.yaml.tmp charts/jenkins/Chart.yaml
 
-helm lint tmp/jenkins/ -f tmp/jenkins/custom-values.yaml --strict
+helm lint charts/jenkins/ -f charts/jenkins/custom-values.yaml --strict
 
-(cd -- "tmp" && helm package jenkins --version "${CHARTVERSION}-${LOCALREVISION}" -d ../charts --app-version ${CONTAINERVERSION} )
+(cd -- "charts" && helm package jenkins --version "${CHARTVERSION}-${LOCALREVISION}" --app-version ${CONTAINERVERSION} )
 
 if [ -d tmp ]
 then
