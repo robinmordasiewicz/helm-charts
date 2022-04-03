@@ -12,11 +12,13 @@ helm pull jenkins/jenkins --version ${CHARTVERSION}
 helm repo rm jenkins
 tar -zxvf jenkins-${CHARTVERSION}.tgz -C charts/
 
-cp values.yaml charts/jenkins/
+#cp values.yaml charts/jenkins/
 
 cat charts/jenkins/Chart.yaml | sed -re "s/^version: [0-9]+\.[0-9]+\.[0-9]+-*[0-9]*/version: ${CHARTVERSION}-${LOCALREVISION}/" > charts/jenkins/Chart.yaml.tmp && mv charts/jenkins/Chart.yaml.tmp charts/jenkins/Chart.yaml
 
-helm package charts/*
+helm lint charts/jenkins/ -f charts/jenkins/values.yaml --strict
 
-helm repo index --url https://robinmordasiewicz.github.io/helm-charts .
+#helm package charts/*
+
+#helm repo index --url https://robinmordasiewicz.github.io/helm-charts .
 

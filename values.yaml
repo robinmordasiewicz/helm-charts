@@ -12,6 +12,7 @@ controller:
     limits:
       cpu: "2000m"
       memory: "4096Mi"
+  installPlugins: []
   jenkinsUrl: http://jenkins.f5.mordasiewicz.com:8080
   installLatestSpecifiedPlugins: true
   JCasC:
@@ -94,7 +95,6 @@ agent:
     limits:
       cpu: "2048m"
       memory: "2048Mi"
-  podName: "jenkins-agent"
 persistence:
   size: "20Gi"
 serviceAccountAgent:
