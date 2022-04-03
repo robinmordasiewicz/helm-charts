@@ -34,4 +34,4 @@ then
   rm -rf tmp
 fi
 
-(cd -- "charts" && helm repo index --url https://robinmordasiewicz.github.io/helm-charts . )
+# ( cd -- "charts" && helm repo index --url https://robinmordasiewicz.github.io/helm-charts . )
