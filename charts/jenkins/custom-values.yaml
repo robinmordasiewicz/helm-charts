@@ -5,10 +5,6 @@ controller:
   tag: "2.332.1-50"
   tagLabel: 2.332.1-50
   disableRememberMe: true
-  primaryView:
-    all:
-      description: "version: 50"
-      name: "all"
   resources:
     requests:
       cpu: "200m"
@@ -28,7 +24,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "Pipeline Jobs"
+          systemMessage: "jcasc-version: 50"
         jobs:
           - script: >
               pipelineJob('create-jenkins-container') {
