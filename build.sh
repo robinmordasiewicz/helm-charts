@@ -34,4 +34,4 @@ then
   rm -rf tmp
 fi
 
-helm repo index --url https://robinmordasiewicz.github.io/helm-charts .
+#helm repo index --url https://robinmordasiewicz.github.io/helm-charts .
