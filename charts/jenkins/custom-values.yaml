@@ -2,8 +2,8 @@ clusterZone: "mordasiewicz.local"
 controller:
   jenkinsAdminEmail: r.mordasiewicz@f5.com
   image: "robinhoodis/jenkins"
-  tag: "2.332.1-49"
-  tagLabel: 2.332.1-49
+  tag: "2.332.1-50"
+  tagLabel: 2.332.1-50
   disableRememberMe: true
   resources:
     requests:
