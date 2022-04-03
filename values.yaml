@@ -98,6 +98,5 @@ agent:
   podName: "jenkins-agent"
 persistence:
   size: "20Gi"
-rbac:
+serviceAccountAgent:
   create: true
-checkDeprecation: true
