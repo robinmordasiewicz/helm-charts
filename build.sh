@@ -4,21 +4,24 @@
 CHARTVERSION=`cat VERSION.helmchart | sed -re "s/^([0-9]+\.[0-9]+\.[0-9]+)-*[0-9]*/\1/"`
 LOCALREVISION=`cat VERSION.helmchart | sed -re "s/^[0-9]+\.[0-9]+\.[0-9]+-*([0-9]*)/\1/"`
 
-rm jenkins-${CHARTVERSION}.tgz
-rm -rf charts/jenkins
-
 helm repo add jenkins https://charts.jenkins.io
-helm pull jenkins/jenkins --version ${CHARTVERSION}
+helm pull jenkins/jenkins --version ${CHARTVERSION} -d tmp/
 helm repo rm jenkins
-tar -zxvf jenkins-${CHARTVERSION}.tgz -C charts/
 
-#cp values.yaml charts/jenkins/
+tar -zxvf tmp/jenkins-${CHARTVERSION}.tgz -C tmp/
 
-cat charts/jenkins/Chart.yaml | sed -re "s/^version: [0-9]+\.[0-9]+\.[0-9]+-*[0-9]*/version: ${CHARTVERSION}-${LOCALREVISION}/" > charts/jenkins/Chart.yaml.tmp && mv charts/jenkins/Chart.yaml.tmp charts/jenkins/Chart.yaml
+cp custom-values.yaml tmp/jenkins/
 
-helm lint charts/jenkins/ -f charts/jenkins/values.yaml --strict
+cat tmp/jenkins/Chart.yaml | sed -re "s/^version: [0-9]+\.[0-9]+\.[0-9]+-*[0-9]*/version: ${CHARTVERSION}-${LOCALREVISION}/" > tmp/jenkins/Chart.yaml.tmp && mv tmp/jenkins/Chart.yaml.tmp tmp/jenkins/Chart.yaml
 
-#helm package charts/*
+helm lint tmp/jenkins/ -f tmp/jenkins/custom-values.yaml --strict
 
-#helm repo index --url https://robinmordasiewicz.github.io/helm-charts .
+(cd -- "tmp" && helm package jenkins --version "${CHARTVERSION}-${LOCALREVISION}" -d ../)
+
+if [ -d tmp ]
+then
+  rm -rf tmp
+fi
+
+helm repo index --url https://robinmordasiewicz.github.io/helm-charts .
 
