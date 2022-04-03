@@ -1,8 +1,18 @@
 #!/bin/bash
 #
 
+set -e
+
 CHARTVERSION=`cat VERSION.helmchart | sed -re "s/^([0-9]+\.[0-9]+\.[0-9]+)-*[0-9]*/\1/"`
 LOCALREVISION=`cat VERSION.helmchart | sed -re "s/^[0-9]+\.[0-9]+\.[0-9]+-*([0-9]*)/\1/"`
+CONTAINERVERSION=`cat VERSION.container`
+
+if [ -d tmp ]
+then
+  rm -rf tmp && mkdir tmp
+else
+  mkdir tmp
+fi
 
 helm repo add jenkins https://charts.jenkins.io
 helm pull jenkins/jenkins --version ${CHARTVERSION} -d tmp/
@@ -16,7 +26,7 @@ cat tmp/jenkins/Chart.yaml | sed -re "s/^version: [0-9]+\.[0-9]+\.[0-9]+-*[0-9]*
 
 helm lint tmp/jenkins/ -f tmp/jenkins/custom-values.yaml --strict
 
-(cd -- "tmp" && helm package jenkins --version "${CHARTVERSION}-${LOCALREVISION}" -d ../)
+(cd -- "tmp" && helm package jenkins --version "${CHARTVERSION}-${LOCALREVISION}" -d ../ --app-version ${CONTAINERVERSION} )
 
 if [ -d tmp ]
 then
