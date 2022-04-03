@@ -9,6 +9,7 @@ curl -s https://raw.githubusercontent.com/robinmordasiewicz/jenkins-container/ma
 
 CONTAINERVERSION=`cat VERSION.container`
 
-cat values.yaml | sed -re "s/(tag:) \"[0-9]*\.[0-9]*\.[0-9]*-[0-9]*\"/\1 \"${CONTAINERVERSION}\"/" | sed -re "s/(tagLabel:) [0-9]*\.[0-9]*\.[0-9]*-[0-9]*/\1 ${CONTAINERVERSION}/" > values.yaml.tmp && mv values.yaml.tmp values.yaml
-cat values.yaml | sed -re "s/(tag:) \"*\"/\1 \"${CONTAINERVERSION}\"/" | sed -re "s/(tagLabel:)/\1 ${CONTAINERVERSION}/" > values.yaml.tmp && mv values.yaml.tmp values.yaml
+#cat values.yaml | sed -re "s/(tag:) \"[0-9]*\.[0-9]*\.[0-9]*-[0-9]*\"/\1 \"${CONTAINERVERSION}\"/" | sed -re "s/(tagLabel:) [0-9]*\.[0-9]*\.[0-9]*-[0-9]*/\1 ${CONTAINERVERSION}/" > values.yaml.tmp && mv values.yaml.tmp values.yaml
+
+cat values.yaml | sed -e "s/tag:.*/  tag: \"${CONTAINERVERSION}\"/" | sed -e "s/tagLabel:.*/  tagLabel: ${CONTAINERVERSION}/" > values.yaml.tmp && mv values.yaml.tmp values.yaml
 
