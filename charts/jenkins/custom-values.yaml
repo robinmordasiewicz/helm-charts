@@ -26,12 +26,12 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-167"
+          systemMessage: "JCasC Version: 3.11.8-168"
         jobs:
           - script: >
-              pipelineJob('sphinx-build') {
+              pipelineJob('sphinx-build-container') {
                 properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/sphinx-build-pipeline')
+                  githubProjectUrl('https://github.com/robinmordasiewicz/sphinx-build-container-pipeline')
                   pipelineTriggers {
                       triggers {
                         githubPush()
@@ -43,7 +43,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/sphinx-build-pipeline')
+                          url('https://github.com/robinmordasiewicz/sphinx-build-container-pipeline')
                         }
                         branch('main')
                         extensions {}
@@ -53,9 +53,9 @@ controller:
                 }
               }
           - script: >
-              pipelineJob('jenkins') {
+              pipelineJob('jenkins-container') {
                 properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/jenkins-pipeline')
+                  githubProjectUrl('https://github.com/robinmordasiewicz/jenkins-container-pipeline')
                   pipelineTriggers {
                       triggers {
                         githubPush()
@@ -67,7 +67,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/jenkins-pipeline.git')
+                          url('https://github.com/robinmordasiewicz/jenkins-container-pipeline.git')
                         }
                         branch('main')
                         extensions {}
@@ -125,9 +125,9 @@ controller:
                 }
               }
           - script: >
-              pipelineJob('nginx') {
+              pipelineJob('nginx-container') {
                 properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/nginx-pipeline')
+                  githubProjectUrl('https://github.com/robinmordasiewicz/nginx-container-pipeline')
                   pipelineTriggers {
                       triggers {
                         githubPush()
@@ -139,7 +139,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/nginx-pipeline.git')
+                          url('https://github.com/robinmordasiewicz/nginx-container-pipeline.git')
                         }
                         branch('main')
                         extensions {}
