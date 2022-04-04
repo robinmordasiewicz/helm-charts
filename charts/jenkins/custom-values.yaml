@@ -26,12 +26,12 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-163"
+          systemMessage: "JCasC Version: 3.11.8-164"
         jobs:
           - script: >
-              pipelineJob('create-jenkins-container') {
+              pipelineJob('sphinx-build-pipeline') {
                 properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/jenkins-container')
+                  githubProjectUrl('https://github.com/robinmordasiewicz/sphinx-build-pipeline')
                   pipelineTriggers {
                       triggers {
                         githubPush()
@@ -43,7 +43,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/jenkins-container.git')
+                          url('https://github.com/robinmordasiewicz/sphinx-build-pipeline')
                         }
                         branch('main')
                         extensions {}
@@ -53,9 +53,9 @@ controller:
                 }
               }
           - script: >
-              pipelineJob('create-helm-chart') {
+              pipelineJob('jenkins-pipeline') {
                 properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/helm-charts')
+                  githubProjectUrl('https://github.com/robinmordasiewicz/jenkins-pipeline')
                   pipelineTriggers {
                       triggers {
                         githubPush()
@@ -67,7 +67,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/helm-charts.git')
+                          url('https://github.com/robinmordasiewicz/jenkins-pipeline.git')
                         }
                         branch('main')
                         extensions {}
@@ -77,9 +77,9 @@ controller:
                 }
               }
           - script: >
-              pipelineJob('deploy-application') {
+              pipelineJob('helm-charts-pipeline') {
                 properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/argocd')
+                  githubProjectUrl('https://github.com/robinmordasiewicz/helm-charts-pipeline')
                   pipelineTriggers {
                       triggers {
                         githubPush()
@@ -91,7 +91,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/argocd.git')
+                          url('https://github.com/robinmordasiewicz/helm-charts-pipeline.git')
                         }
                         branch('main')
                         extensions {}
@@ -101,7 +101,31 @@ controller:
                 }
               }
           - script: >
-              pipelineJob('create-nginx-container') {
+              pipelineJob('argocd-pipeline') {
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/argocd-pipeline')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/argocd-pipeline.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('nginx-container') {
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/nginx-pipeline')
                   pipelineTriggers {
