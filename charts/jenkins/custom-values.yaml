@@ -2,8 +2,8 @@ clusterZone: "mordasiewicz.local"
 controller:
   jenkinsAdminEmail: r.mordasiewicz@f5.com
   image: "robinhoodis/jenkins"
-  tag: "2.332.1-53"
-  tagLabel: 2.332.1-53
+  tag: "2.332.1-54"
+  tagLabel: 2.332.1-54
   disableRememberMe: true
   resources:
     requests:
@@ -26,7 +26,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 139"
+          systemMessage: "JCasC Version: 140"
         jobs:
           - script: >
               pipelineJob('create-jenkins-container') {
