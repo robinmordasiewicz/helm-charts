@@ -26,7 +26,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-155"
+          systemMessage: "JCasC Version: 3.11.8-156"
         jobs:
           - script: >
               pipelineJob('create jenkins container') {
@@ -44,6 +44,30 @@ controller:
                       git {
                         remote {
                           url('https://github.com/robinmordasiewicz/jenkins-container.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('create new helm chart') {
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/helm-charts')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/helm-charts.git')
                         }
                         branch('main')
                         extensions {}
