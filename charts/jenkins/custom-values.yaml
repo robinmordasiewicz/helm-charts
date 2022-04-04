@@ -26,7 +26,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-157"
+          systemMessage: "JCasC Version: 3.11.8-158"
         jobs:
           - script: >
               pipelineJob('create new jenkins container') {
