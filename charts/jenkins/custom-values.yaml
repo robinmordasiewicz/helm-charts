@@ -29,7 +29,7 @@ controller:
           systemMessage: "JCasC Version: 3.11.8-157"
         jobs:
           - script: >
-              pipelineJob('create jenkins container') {
+              pipelineJob('create new jenkins container') {
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/jenkins-container')
                   pipelineTriggers {
