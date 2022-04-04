@@ -26,7 +26,10 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-147"
+          systemMessage: "JCasC Version: 3.11.8-148"
+          clouds:
+            - kubernetes:
+                credentialsId: "kubeconfig"
         jobs:
           - script: >
               pipelineJob('create-jenkins-container') {
