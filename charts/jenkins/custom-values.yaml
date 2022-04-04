@@ -26,10 +26,10 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-165"
+          systemMessage: "JCasC Version: 3.11.8-166"
         jobs:
           - script: >
-              pipelineJob('sphinx-build-pipeline') {
+              pipelineJob('sphinx-build') {
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/sphinx-build-pipeline')
                   pipelineTriggers {
@@ -53,7 +53,7 @@ controller:
                 }
               }
           - script: >
-              pipelineJob('jenkins-pipeline') {
+              pipelineJob('jenkins') {
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/jenkins-pipeline')
                   pipelineTriggers {
@@ -77,7 +77,7 @@ controller:
                 }
               }
           - script: >
-              pipelineJob('helm-charts-pipeline') {
+              pipelineJob('helm-charts') {
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/helm-charts-pipeline')
                   pipelineTriggers {
@@ -101,7 +101,7 @@ controller:
                 }
               }
           - script: >
-              pipelineJob('argocd-pipeline') {
+              pipelineJob('argocd') {
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/argocd-pipeline')
                   pipelineTriggers {
@@ -125,7 +125,7 @@ controller:
                 }
               }
           - script: >
-              pipelineJob('nginx-container') {
+              pipelineJob('nginx') {
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/nginx-pipeline')
                   pipelineTriggers {
