@@ -44,10 +44,6 @@ pipeline {
     }
     stage('prepareWS') {
       steps {
-        sh 'mkdir -p jenkins-container'
-        dir ( 'jenkins-container' ) {
-          git branch: 'main', url: 'https://github.com/robinmordasiewicz/jenkins-container.git'
-        }
         sh 'mkdir -p helm-charts'
         dir ( 'helm-charts' ) {
           git branch: 'main', url: 'https://github.com/robinmordasiewicz/helm-charts.git'
@@ -58,50 +54,6 @@ pipeline {
         }
       }
     }
-//    stage('bump container version') {
-//      steps {
-//        dir ( 'jenkins-container' ) {
-//          container('ubuntu') {
-//            sh "sh increment-version.sh"
-//          }
-//        }
-//      }
-//    }
-    stage('build container') {
-      steps {
-        dir ( 'jenkins-container' ) {
-          container(name: 'kaniko', shell: '/busybox/sh') {
-            script {
-              sh '''
-              /kaniko/executor --dockerfile `pwd`/Dockerfile \
-                               --context `pwd` \
-                               --destination=robinhoodis/jenkins:`cat VERSION`
-              '''
-              sh '''
-              /kaniko/executor --dockerfile `pwd`/Dockerfile \
-                               --context `pwd` \
-                               --destination=robinhoodis/jenkins:latest
-              '''
-            }
-          }
-        }
-      }
-    }
-//    stage('commit container version') {
-//      steps {
-//        dir ( 'jenkins-container' ) {
-//          sh 'git config user.email "robin@mordasiewicz.com"'
-//          sh 'git config user.name "Robin Mordasiewicz"'
-//          sh 'git add .'
-//          sh 'git tag `cat VERSION`'
-//          sh 'git commit -m "`cat VERSION`"'
-//          withCredentials([gitUsernamePassword(credentialsId: 'github-pat', gitToolName: 'git')]) {
-//            sh '/usr/bin/git push origin main'
-//            sh '/usr/bin/git push origin `cat VERSION`'
-//          }
-//        }
-//      }
-//    }
     stage('bump helm version') {
       steps {
         dir ( 'helm-charts' ) {
@@ -113,15 +65,6 @@ pipeline {
         }
       }
     }
-//    stage('helm build') {
-//      steps {
-//        dir ( 'helm-charts' ) {
-//          container('ubuntu') {
-//            sh 'sh build.sh'
-//          }
-//        }
-//      }
-//    }
     stage('commit chart') {
       steps {
         dir ( 'helm-charts' ) {
@@ -144,15 +87,6 @@ pipeline {
             script {
               sh "sh increment-jenkins-version.sh"
             }
-          }
-        }
-      }
-    }
-    stage('deploy-app') {
-      steps {
-        withKubeConfig([credentialsId: 'kubeconfig']) {
-          container('ubuntu') {
-            sh 'kubectl apply -f argocd/jenkins.yaml'
           }
         }
       }
