@@ -1,6 +1,6 @@
 # helm-charts
 
-https://lippertmarkus.com/2020/08/13/chartreleaser/
+Reference: https://lippertmarkus.com/2020/08/13/chartreleaser/
 
 ## Usage
 
