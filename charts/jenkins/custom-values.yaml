@@ -26,8 +26,32 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-174"
+          systemMessage: "JCasC Version: 3.11.8-175"
         jobs:
+          - script: >
+              pipelineJob('make-html') {
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/make-html-pipeline')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/make-html-pipeline.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
           - script: >
               pipelineJob('sphinx-build-container') {
                 properties {
@@ -43,7 +67,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/sphinx-build-container-pipeline')
+                          url('https://github.com/robinmordasiewicz/sphinx-build-container-pipeline.git')
                         }
                         branch('main')
                         extensions {}
