@@ -20,11 +20,13 @@ controller:
     configScripts:
       custom-configs: |
         unclassified:
+          ansiColorBuildWrapper:
+            globalColorMapName: "xterm"
           gitSCM:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 138"
+          systemMessage: "JCasC Version: 139"
         jobs:
           - script: >
               pipelineJob('create-jenkins-container') {
