@@ -28,12 +28,35 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-239"
+          systemMessage: "JCasC Version: 3.11.8-240"
         jobs:
           - script: >
-              pipelineJob('make-html') {
+              pipelineJob('docs') {
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/docs')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/make-html-pipeline.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
+              pipelineJob('make-html') {
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/make-html-pipeline')
                   pipelineTriggers {
                       triggers {
                         githubPush()
@@ -105,6 +128,30 @@ controller:
           - script: >
               pipelineJob('jenkins-container') {
                 properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/jenkins-container')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/jenkins-container-pipeline.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('jenkins-container-pipeline') {
+                properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/jenkins-container-pipeline')
                   pipelineTriggers {
                       triggers {
@@ -129,6 +176,30 @@ controller:
           - script: >
               pipelineJob('helm-charts') {
                 properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/helm-charts')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/helm-charts-pipeline.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('helm-charts-pipeline') {
+                properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/helm-charts-pipeline')
                   pipelineTriggers {
                       triggers {
@@ -152,6 +223,30 @@ controller:
               }
           - script: >
               pipelineJob('argocd') {
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/argocd')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/argocd-pipeline.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('argocd-pipeline') {
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/argocd-pipeline')
                   pipelineTriggers {
