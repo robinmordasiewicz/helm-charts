@@ -31,7 +31,7 @@ controller:
           - script: >
               pipelineJob('make-html') {
                 properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/make-html-pipeline')
+                  githubProjectUrl('https://github.com/robinmordasiewicz/docs')
                   pipelineTriggers {
                       triggers {
                         githubPush()
