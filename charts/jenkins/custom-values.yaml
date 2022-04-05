@@ -4,8 +4,8 @@ persistence:
 controller:
   jenkinsAdminEmail: r.mordasiewicz@f5.com
   image: "robinhoodis/jenkins"
-  tag: "2.332.1-71"
-  tagLabel: 2.332.1-71
+  tag: "2.332.1-72"
+  tagLabel: 2.332.1-72
   resources:
     requests:
       cpu: "200m"
@@ -28,7 +28,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-237"
+          systemMessage: "JCasC Version: 3.11.8-238"
         jobs:
           - script: >
               pipelineJob('make-html') {
@@ -56,6 +56,30 @@ controller:
               }
           - script: >
               pipelineJob('sphinx-build-container') {
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/sphinx-build-container')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/sphinx-build-container-pipeline.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('sphinx-build-container-pipeline') {
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/sphinx-build-container-pipeline')
                   pipelineTriggers {
