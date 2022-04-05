@@ -26,7 +26,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-235"
+          systemMessage: "JCasC Version: 3.11.8-236"
         jobs:
           - script: >
               pipelineJob('make-html') {
@@ -151,7 +151,7 @@ controller:
           - script: >
               pipelineJob('nginx-container') {
                 properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/nginx-container-pipeline')
+                  githubProjectUrl('https://github.com/robinmordasiewicz/nginx-container')
                   pipelineTriggers {
                       triggers {
                         githubPush()
