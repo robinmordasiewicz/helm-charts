@@ -1,4 +1,6 @@
 clusterZone: "mordasiewicz.local"
+persistence:
+  enabled: false
 controller:
   jenkinsAdminEmail: r.mordasiewicz@f5.com
   image: "robinhoodis/jenkins"
@@ -26,7 +28,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-236"
+          systemMessage: "JCasC Version: 3.11.8-237"
         jobs:
           - script: >
               pipelineJob('make-html') {
