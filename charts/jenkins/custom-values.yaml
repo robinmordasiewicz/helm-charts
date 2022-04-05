@@ -4,6 +4,13 @@ controller:
   image: "robinhoodis/jenkins"
   tag: "2.332.1-71"
   tagLabel: 2.332.1-71
+  resources:
+    requests:
+      cpu: "200m"
+      memory: "512Mi"
+    limits:
+      cpu: "2000m"
+      memory: "4096Mi"
   disableRememberMe: true
   installPlugins: []
   jenkinsUrl: http://jenkins.f5.mordasiewicz.com:8080
@@ -19,7 +26,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-234"
+          systemMessage: "JCasC Version: 3.11.8-235"
         jobs:
           - script: >
               pipelineJob('make-html') {
