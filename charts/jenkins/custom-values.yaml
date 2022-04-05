@@ -19,7 +19,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-233"
+          systemMessage: "JCasC Version: 3.11.8-234"
         jobs:
           - script: >
               pipelineJob('make-html') {
@@ -187,7 +187,6 @@ controller:
 agent:
   jenkinsUrl: http://jenkins:8080
   jenkinsTunnel: jenkins-agent:50000
-  podName: "agent"
 persistence:
   size: "60Gi"
 serviceAccountAgent:
