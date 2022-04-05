@@ -28,7 +28,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-245"
+          systemMessage: "JCasC Version: 3.11.8-246"
         jobs:
           - script: >
               pipelineJob('docs') {
@@ -54,6 +54,7 @@ controller:
                   }
                 }
               }
+          - script: >
               pipelineJob('make-html') {
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/make-html-pipeline')
