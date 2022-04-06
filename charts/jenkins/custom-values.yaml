@@ -218,6 +218,7 @@ controller:
 agent:
   jenkinsUrl: http://jenkins:8080
   jenkinsTunnel: jenkins-agent:50000
+  enabled: false
 persistence:
   size: "60Gi"
 serviceAccountAgent:
