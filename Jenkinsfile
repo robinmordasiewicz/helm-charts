@@ -1,0 +1,37 @@
+pipeline {
+  agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          containers:
+          - name: ubuntu
+            image: robinhoodis/ubuntu:latest
+            command:
+            - cat
+            tty: true
+        '''
+    }
+  }
+  stages {
+    stage('commit-argo') {
+      steps {
+        sh 'mkdir -p argocd'
+        dir ( 'argocd' ) {
+          git branch: 'main', url: 'https://github.com/robinmordasiewicz/argocd.git'
+        }
+        sh 'cp VERSION.helmchart argocd/'
+        dir ( 'argocd' ) {
+          sh 'git config user.email "robin@mordasiewicz.com"'
+          sh 'git config user.name "Robin Mordasiewicz"'
+          sh 'git add .'
+          sh 'git commit -m "Jenkins Helmchart `cat VERSION.helmchart`"'
+          withCredentials([gitUsernamePassword(credentialsId: 'github-pat', gitToolName: 'git')]) {
+            sh '/usr/bin/git push origin main'
+          }
+        }
+      }
+    }
+  }
+}
