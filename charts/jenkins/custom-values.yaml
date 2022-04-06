@@ -26,7 +26,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-254"
+          systemMessage: "JCasC Version: 3.11.8-255"
         jobs:
           - script: >
               pipelineJob('docs') {
@@ -163,7 +163,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/argocd-pipeline.git')
+                          url('https://github.com/robinmordasiewicz/helm-charts.git')
                         }
                         branch('main')
                         extensions {}
