@@ -26,7 +26,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-253"
+          systemMessage: "JCasC Version: 3.11.8-254"
         jobs:
           - script: >
               pipelineJob('docs') {
@@ -139,31 +139,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/jenkins-container-pipeline.git')
-                        }
-                        branch('main')
-                        extensions {}
-                      }
-                    }
-                  }
-                }
-              }
-          - script: >
-              pipelineJob('jenkins-container-pipeline') {
-                properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/jenkins-container-pipeline')
-                  pipelineTriggers {
-                      triggers {
-                        githubPush()
-                      }
-                   }
-                }
-                definition {
-                  cpsScm {
-                    scm {
-                      git {
-                        remote {
-                          url('https://github.com/robinmordasiewicz/jenkins-container-pipeline.git')
+                          url('https://github.com/robinmordasiewicz/jenkins-container.git')
                         }
                         branch('main')
                         extensions {}
