@@ -307,7 +307,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/nginx-container-pipeline.git')
+                          url('https://github.com/robinmordasiewicz/nginx-container.git')
                         }
                         branch('main')
                         extensions {}
