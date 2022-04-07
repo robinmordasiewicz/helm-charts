@@ -8,7 +8,13 @@ LOCALREVISION=`cat VERSION.helmchart | sed -re "s/^[0-9]+\.[0-9]+\.[0-9]+-*([0-9
 
 echo "${CHARTVERSION}-${LOCALREVISION}" > VERSION.helmchart
 
-curl -s https://raw.githubusercontent.com/robinmordasiewicz/jenkins-container/main/VERSION > VERSION.container
+#curl -s https://raw.githubusercontent.com/robinmordasiewicz/jenkins-container/main/VERSION > VERSION.container
+
+[ -d tmp ] && rm -rf tmp
+mkdir tmp
+git clone https://github.com/robinmordasiewicz/jenkins-container.git tmp/
+cp tmp/VERSION VERSION.container
+[ -d tmp ] && rm -rf tmp
 
 CONTAINERVERSION=`cat VERSION.container`
 
