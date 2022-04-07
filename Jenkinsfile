@@ -6,7 +6,7 @@ pipeline {
         sh 'mkdir -p argocd'
         dir ( 'argocd' ) {
           git branch: 'main', url: 'https://github.com/robinmordasiewicz/argocd.git'
-          sh 'increment-helm-version.sh'
+          sh 'sh increment-helm-version.sh'
         }
         dir ( 'argocd' ) {
           sh 'git config user.email "robin@mordasiewicz.com"'
