@@ -6,8 +6,8 @@ pipeline {
         sh 'mkdir -p argocd'
         dir ( 'argocd' ) {
           git branch: 'main', url: 'https://github.com/robinmordasiewicz/argocd.git'
+          sh 'sh increment-version.sh'
         }
-        sh 'cp VERSION.helmchart argocd/'
         dir ( 'argocd' ) {
           sh 'git config user.email "robin@mordasiewicz.com"'
           sh 'git config user.name "Robin Mordasiewicz"'
