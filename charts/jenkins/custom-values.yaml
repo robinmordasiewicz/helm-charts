@@ -2,8 +2,8 @@ clusterZone: "mordasiewicz.local"
 controller:
   jenkinsAdminEmail: r.mordasiewicz@f5.com
   image: "robinhoodis/jenkins"
-  tag: "2.332.2-76"
-  tagLabel: 2.332.2-76
+  tag: "2.332.2-72"
+  tagLabel: 2.332.2-72
   resources:
     requests:
       cpu: "200m"
