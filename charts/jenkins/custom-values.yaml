@@ -6,11 +6,11 @@ controller:
   tagLabel: 2.332.2-80
   resources:
     requests:
-      cpu: "200m"
-      memory: "512Mi"
+      cpu: "1000m"
+      memory: "1024Mi"
     limits:
       cpu: "2000m"
-      memory: "4096Mi"
+      memory: "2048Mi"
   disableRememberMe: true
   installPlugins: []
   jenkinsUrl: http://jenkins.f5.mordasiewicz.com:8080
@@ -26,7 +26,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-276"
+          systemMessage: "JCasC Version: 3.11.8-277"
         jobs:
           - script: >
               pipelineJob('docs') {
@@ -218,6 +218,13 @@ controller:
 agent:
   jenkinsUrl: http://jenkins:8080
   jenkinsTunnel: jenkins-agent:50000
+  resources:
+    requests:
+      cpu: "2000m"
+      memory: "2084Mi"
+    limits:
+      cpu: "4000m"
+      memory: "4168Mi"
 persistence:
   size: "60Gi"
 serviceAccountAgent:
