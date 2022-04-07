@@ -1,18 +1,6 @@
 pipeline {
   agent {
-    kubernetes {
-      yaml '''
-        apiVersion: v1
-        kind: Pod
-        spec:
-          containers:
-          - name: ubuntu
-            image: robinhoodis/ubuntu:latest
-            command:
-            - cat
-            tty: true
-        '''
-    }
+    any
   }
   stages {
     stage('commit-argo') {
