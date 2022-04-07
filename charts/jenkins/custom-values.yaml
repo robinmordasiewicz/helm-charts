@@ -26,7 +26,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-278"
+          systemMessage: "JCasC Version: 3.11.8-279"
         jobs:
           - script: >
               pipelineJob('docs') {
@@ -35,6 +35,7 @@ controller:
                   pipelineTriggers {
                       triggers {
                         githubPush()
+                        pollSCM ()
                       }
                    }
                 }
@@ -59,6 +60,7 @@ controller:
                   pipelineTriggers {
                       triggers {
                         githubPush()
+                        pollSCM ()
                       }
                    }
                 }
@@ -83,6 +85,7 @@ controller:
                   pipelineTriggers {
                       triggers {
                         githubPush()
+                        pollSCM ()
                       }
                    }
                 }
@@ -107,6 +110,7 @@ controller:
                   pipelineTriggers {
                       triggers {
                         githubPush()
+                        pollSCM ()
                       }
                    }
                 }
@@ -131,6 +135,7 @@ controller:
                   pipelineTriggers {
                       triggers {
                         githubPush()
+                        pollSCM ()
                       }
                    }
                 }
@@ -155,6 +160,7 @@ controller:
                   pipelineTriggers {
                       triggers {
                         githubPush()
+                        pollSCM ()
                       }
                    }
                 }
