@@ -26,8 +26,32 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-288"
+          systemMessage: "JCasC Version: 3.11.8-289"
         jobs:
+          - script: >
+              pipelineJob('sphinx-theme') {
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/sphinx-theme')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/make-html.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
           - script: >
               pipelineJob('docs') {
                 properties {
