@@ -43,7 +43,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/make-html.git')
+                          url('https://github.com/robinmordasiewicz/sphinx-theme.git')
                         }
                         branch('main')
                         extensions {}
