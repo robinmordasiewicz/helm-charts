@@ -26,8 +26,32 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-290"
+          systemMessage: "JCasC Version: 3.11.8-291"
         jobs:
+          - script: >
+              pipelineJob('ubuntu') {
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/ubuntu')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/ubuntu.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
           - script: >
               pipelineJob('sphinx-theme') {
                 properties {
