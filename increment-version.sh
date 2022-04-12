@@ -21,4 +21,3 @@ cat charts/jenkins/custom-values.yaml | sed -e "s/systemMessage:.*/systemMessage
 
 cat charts/jenkins/Chart.yaml | sed -re "s/^version: [0-9]+\.[0-9]+\.[0-9]+-*[0-9]*/version: ${CHARTVERSION}-${LOCALREVISION}/" > charts/jenkins/Chart.yaml.tmp && mv charts/jenkins/Chart.yaml.tmp charts/jenkins/Chart.yaml
 
-
