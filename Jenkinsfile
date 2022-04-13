@@ -3,6 +3,9 @@ pipeline {
     disableConcurrentBuilds()
     skipDefaultCheckout(true)
   }
+  triggers {
+    upstream(upstreamProjects: "jenkins", threshold: hudson.model.Result.SUCCESS)
+  }
   agent {
     kubernetes {
       yaml '''
