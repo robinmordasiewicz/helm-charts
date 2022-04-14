@@ -60,66 +60,6 @@ pipeline {
         }
       }
     }
-    stage('Check repo for container') {
-      when {
-        beforeAgent true
-        anyOf {
-          changeset "VERSION"
-          changeset "Dockerfile"
-          triggeredBy cause: 'UserIdCause'
-        }
-      }
-      steps {
-        container('ubuntu') {
-          sh 'skopeo inspect docker://docker.io/robinhoodis/ubuntu:`cat VERSION.container` > /dev/null || echo "create new container: `cat VERSION.container`" > BUILDNEWCONTAINER.txt'
-        }
-      }
-    }
-    stage('Build/Push Container') {
-      when {
-        beforeAgent true
-        anyOf {
-          changeset "VERSION"
-          changeset "Dockerfile"
-          triggeredBy cause: 'UserIdCause'
-        }
-      }
-      steps {
-        container(name: 'kaniko', shell: '/busybox/sh') {
-          script {
-            sh ''' 
-            [ ! -f BUILDNEWCONTAINER.txt ] || \
-            /kaniko/executor --dockerfile=Dockerfile \
-                             --context=git://github.com/robinmordasiewicz/ubuntu.git \
-                             --destination=robinhoodis/ubuntu:`cat VERSION.container` \
-                             --destination=robinhoodis/ubuntu:latest \
-                             --cache=true
-            '''
-          }
-        }
-      }
-    }
-    stage('Commit new VERSION') {
-      when {
-        beforeAgent true
-        anyOf {
-          changeset "Dockerfile"
-          triggeredBy cause: 'UserIdCause'
-        }
-      }
-      steps {
-        sh 'git config user.email "robin@mordasiewicz.com"'
-        sh 'git config user.name "Robin Mordasiewicz"'
-        // sh 'git add -u'
-        // sh 'git diff --quiet && git diff --staged --quiet || git commit -m "`cat VERSION.container`"'
-        sh 'git add . && git diff --staged --quiet || git commit -m "`cat VERSION.container`"'
-        withCredentials([gitUsernamePassword(credentialsId: 'github-pat', gitToolName: 'git')]) {
-          // sh 'git diff --quiet && git diff --staged --quiet || git push origin HEAD:main'
-          // sh 'git diff --quiet HEAD || git push origin HEAD:main'
-          sh 'git push origin HEAD:main'
-        }
-      }
-    }
   }
   post {
     always {
