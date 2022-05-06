@@ -2,8 +2,8 @@ clusterZone: "mordasiewicz.local"
 controller:
   jenkinsAdminEmail: r.mordasiewicz@f5.com
   image: "robinhoodis/jenkins"
-  tag: "2.332.2-82"
-  tagLabel: 2.332.2-82
+  tag: "2.332.3-83"
+  tagLabel: 2.332.3-83
   resources:
     requests:
       cpu: "100m"
@@ -26,7 +26,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-294"
+          systemMessage: "JCasC Version: 3.11.8-295"
         jobs:
           - script: >
               pipelineJob('ubuntu') {
