@@ -26,13 +26,148 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-296"
+          systemMessage: "JCasC Version: 3.11.8-297"
         tool:
           git:
             installations:
             - home: "/usr/bin/git"
               name: "git"
         jobs:
+          - script: >
+              pipelineJob('diagrams') {
+                description('diagrams container')
+                displayName('diagrams container')
+                quietPeriod(60)
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/diagrams')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/diagrams.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('mermaid-cli') {
+                description('mermaid-cli container')
+                displayName('mermaid-cli container')
+                quietPeriod(60)
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/mermaid-cli')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/mermaid-cli.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('marp') {
+                description('marp container')
+                displayName('marp container')
+                quietPeriod(60)
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/marp')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/marp.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('ffmpeg') {
+                description('ffmpeg container')
+                displayName('ffmpeg container')
+                quietPeriod(60)
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/ffmpeg')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/ffmpeg.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('Intro') {
+                description('Introduction Assets')
+                displayName('Introduction Assets')
+                quietPeriod(60)
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/intro')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/intro.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
           - script: >
               pipelineJob('imagemagick') {
                 description('imagemagick for creating and editing images')
@@ -88,12 +223,12 @@ controller:
                 }
               }
           - script: >
-              pipelineJob('mlt') {
+              pipelineJob('melt') {
                 description('MLT Framework')
-                displayName('mlt container')
+                displayName('melt container')
                 quietPeriod(60)
                 properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/mlt')
+                  githubProjectUrl('https://github.com/robinmordasiewicz/melt')
                   pipelineTriggers {
                       triggers {
                         githubPush()
@@ -105,7 +240,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/mlt.git')
+                          url('https://github.com/robinmordasiewicz/melt.git')
                         }
                         branch('main')
                         extensions {}
