@@ -2,8 +2,8 @@ clusterZone: "mordasiewicz.local"
 controller:
   jenkinsAdminEmail: r.mordasiewicz@f5.com
   image: "robinhoodis/jenkins"
-  tag: "2.332.3-85"
-  tagLabel: 2.332.3-85
+  tag: "2.332.3-87"
+  tagLabel: 2.332.3-87
   resources:
     requests:
       cpu: "100m"
@@ -26,7 +26,7 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-298"
+          systemMessage: "JCasC Version: 3.11.8-300"
         tool:
           git:
             installations:
@@ -542,7 +542,7 @@ controller:
         enableCaptcha: false
         users:
         - id: "${chart-admin-username}"
-          name: "Robin Mordasiewicz"
+          name: "John Smith"
           password: "${chart-admin-password}"
           properties:
           - mailer:
