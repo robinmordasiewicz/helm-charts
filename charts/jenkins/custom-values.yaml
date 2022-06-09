@@ -2,8 +2,8 @@ clusterZone: "mordasiewicz.local"
 controller:
   jenkinsAdminEmail: r.mordasiewicz@f5.com
   image: "robinhoodis/jenkins"
-  tag: "2.332.3-83"
-  tagLabel: 2.332.3-83
+  tag: "2.332.3-85"
+  tagLabel: 2.332.3-85
   resources:
     requests:
       cpu: "100m"
@@ -13,7 +13,7 @@ controller:
       memory: "4096Mi"
   disableRememberMe: true
   installPlugins: []
-  jenkinsUrl: http://jenkins.f5.mordasiewicz.com:8080
+  jenkinsUrl: http://robin-jenkins.amer.myedgedemo.com:8080
   installLatestSpecifiedPlugins: true
   JCasC:
     defaultConfig: true
@@ -26,7 +26,13 @@ controller:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-297"
+          systemMessage: "JCasC Version: 3.11.8-298"
+        tool:
+          git:
+            installations:
+            - home: "/usr/bin/git"
+              name: "git"
+        jobs:
         tool:
           git:
             installations:
@@ -34,10 +40,64 @@ controller:
               name: "git"
         jobs:
           - script: >
+              pipelineJob('contentascode') {
+                description('Content As Code')
+                displayName('Content As Code')
+                quietPeriod(5)
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/contentascode')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/termi.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
+              pipelineJob('terminalizer') {
+                description('terminalizer container')
+                displayName('terminalizer container')
+                quietPeriod(5)
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/terminalizer')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/terminalizer.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
+          - script: >
               pipelineJob('diagrams') {
                 description('diagrams container')
                 displayName('diagrams container')
-                quietPeriod(60)
+                quietPeriod(5)
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/diagrams')
                   pipelineTriggers {
@@ -64,7 +124,7 @@ controller:
               pipelineJob('mermaid-cli') {
                 description('mermaid-cli container')
                 displayName('mermaid-cli container')
-                quietPeriod(60)
+                quietPeriod(5)
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/mermaid-cli')
                   pipelineTriggers {
@@ -88,12 +148,12 @@ controller:
                 }
               }
           - script: >
-              pipelineJob('marp') {
-                description('marp container')
-                displayName('marp container')
-                quietPeriod(60)
+              pipelineJob('marp-cli') {
+                description('marp-cli container')
+                displayName('marp-cli container')
+                quietPeriod(5)
                 properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/marp')
+                  githubProjectUrl('https://github.com/robinmordasiewicz/marp-cli')
                   pipelineTriggers {
                       triggers {
                         githubPush()
@@ -105,7 +165,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/marp.git')
+                          url('https://github.com/robinmordasiewicz/marp-cli.git')
                         }
                         branch('main')
                         extensions {}
@@ -118,7 +178,7 @@ controller:
               pipelineJob('ffmpeg') {
                 description('ffmpeg container')
                 displayName('ffmpeg container')
-                quietPeriod(60)
+                quietPeriod(5)
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/ffmpeg')
                   pipelineTriggers {
@@ -142,37 +202,10 @@ controller:
                 }
               }
           - script: >
-              pipelineJob('Intro') {
-                description('Introduction Assets')
-                displayName('Introduction Assets')
-                quietPeriod(60)
-                properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/intro')
-                  pipelineTriggers {
-                      triggers {
-                        githubPush()
-                      }
-                   }
-                }
-                definition {
-                  cpsScm {
-                    scm {
-                      git {
-                        remote {
-                          url('https://github.com/robinmordasiewicz/intro.git')
-                        }
-                        branch('main')
-                        extensions {}
-                      }
-                    }
-                  }
-                }
-              }
-          - script: >
               pipelineJob('imagemagick') {
                 description('imagemagick for creating and editing images')
                 displayName('imagemagick container')
-                quietPeriod(60)
+                quietPeriod(5)
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/imagemagick')
                   pipelineTriggers {
@@ -199,7 +232,7 @@ controller:
               pipelineJob('video-publisher') {
                 description('Publish videos to social media platforms')
                 displayName('video-publisher container')
-                quietPeriod(60)
+                quietPeriod(5)
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/vide-publisher')
                   pipelineTriggers {
@@ -226,7 +259,7 @@ controller:
               pipelineJob('melt') {
                 description('MLT Framework')
                 displayName('melt container')
-                quietPeriod(60)
+                quietPeriod(5)
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/melt')
                   pipelineTriggers {
@@ -253,7 +286,7 @@ controller:
               pipelineJob('ubuntu') {
                 description('A ubuntu container with some utilities for running inside kubernetes')
                 displayName('ubuntu container')
-                quietPeriod(60)
+                quietPeriod(5)
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/ubuntu')
                   pipelineTriggers {
@@ -277,12 +310,12 @@ controller:
                 }
               }
           - script: >
-              pipelineJob('sphinx-theme') {
-                description('css and templates are used to render html with a sylized layout')
-                displayName('sphinx theme')
-                quietPeriod(60)
+              pipelineJob('theme') {
+                description('css and templates are used to render html/PPTX/MP4/png/svg with a sylized layout')
+                displayName('theme')
+                quietPeriod(5)
                 properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/sphinx-theme')
+                  githubProjectUrl('https://github.com/robinmordasiewicz/theme')
                   pipelineTriggers {
                       triggers {
                         githubPush()
@@ -294,7 +327,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/sphinx-theme.git')
+                          url('https://github.com/robinmordasiewicz/theme.git')
                         }
                         branch('main')
                         extensions {}
@@ -304,12 +337,12 @@ controller:
                 }
               }
           - script: >
-              pipelineJob('make-html') {
-                description('When the theme or source docs repos are changed this make-html pipeline is triggered.')
-                displayName('make html')
-                quietPeriod(60)
+              pipelineJob('contentascode') {
+                description('When the theme or source docs repos are changed this pipeline is triggered.')
+                displayName('contentascode')
+                quietPeriod(5)
                 properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/make-html')
+                  githubProjectUrl('https://github.com/robinmordasiewicz/contentascode')
                   pipelineTriggers {
                       triggers {
                         githubPush()
@@ -317,51 +350,43 @@ controller:
                    }
                 }
                 definition {
-                  cpsScm {
-                    scm {
-                      git {
-                        remote {
-                          url('https://github.com/robinmordasiewicz/make-html.git')
+                  cps {
+                    script("""\
+                      pipeline {
+                          agent {
+                          kubernetes {
+                            yaml '''
+                              apiVersion: v1
+                              kind: Pod
+                              spec:
+                                containers:
+                                - name: ubuntu
+                                  image: robinhoodis/ubuntu:latest
+                                  imagePullPolicy: Always
+                                  command:
+                                  - cat
+                                  tty: true
+                              '''
+                          }
                         }
-                        branch('main')
-                        extensions {}
-                      }
-                    }
-                  }
-                }
-              }
-          - script: >
-              pipelineJob('make-video') {
-                description('When the theme or source docs repos are changed this make-video pipeline is triggered.')
-                displayName('make video')
-                quietPeriod(60)
-                properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/make-video')
-                  pipelineTriggers {
-                      triggers {
-                        githubPush()
-                      }
-                   }
-                }
-                definition {
-                  cpsScm {
-                    scm {
-                      git {
-                        remote {
-                          url('https://github.com/robinmordasiewicz/make-video.git')
+                        stages {
+                          stage ('init') {
+                            steps {
+                              container('ubuntu') {
+                                sh 'echo Docs'
+                              }
+                            }
+                          }
                         }
-                        branch('main')
-                        extensions {}
-                      }
-                    }
+                      }""".stripIndent())
                   }
                 }
               }
           - script: >
               pipelineJob('f5-cnf-lab') {
-                description('Repo for the markdown source. This github repo should have a webhook, and this should be an upstream job to trigger make-html')
-                displayName('docs')
-                quietPeriod(60)
+                description('Repo for the markdown source. This github repo should have a webhook, and this should be an upstream job to trigger nginx')
+                displayName('f5-cnf-lab')
+                quietPeriod(5)
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/f5-cnf-lab')
                   pipelineTriggers {
@@ -374,11 +399,28 @@ controller:
                   cps {
                     script("""\
                       pipeline {
-                        agent any
+                          agent {
+                          kubernetes {
+                            yaml '''
+                              apiVersion: v1
+                              kind: Pod
+                              spec:
+                                containers:
+                                - name: ubuntu
+                                  image: robinhoodis/ubuntu:latest
+                                  imagePullPolicy: Always
+                                  command:
+                                  - cat
+                                  tty: true
+                              '''
+                          }
+                        }
                         stages {
                           stage ('init') {
                             steps {
-                              echo "Docs Job"
+                              container('ubuntu') {
+                                sh 'echo Docs'
+                              }
                             }
                           }
                         }
@@ -388,9 +430,9 @@ controller:
               }
           - script: >
               pipelineJob('sphinx') {
-                description('The sphinx-build html rendering engine container. This pipeline will update make-html/Jenkinsfile. This should not be an upstream trigger for make-html, and make-html should have a webhook')
+                description('The sphinx-build html rendering engine container. This pipeline will update nginx/Jenkinsfile. This should not be an upstream trigger for nginx, and nginx should have a webhook')
                 displayName('sphinx container')
-                quietPeriod(60)
+                quietPeriod(5)
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/sphinx')
                   pipelineTriggers {
@@ -417,7 +459,7 @@ controller:
               pipelineJob('jenkins') {
                 description('The jenkins container pipeline will check the currently declared version and make sure that the image exists in the repo.')
                 displayName('jenkins container')
-                quietPeriod(60)
+                quietPeriod(5)
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/jenkins')
                   pipelineTriggers {
@@ -444,7 +486,7 @@ controller:
               pipelineJob('helm-charts') {
                 description('Commiting a new version to github will trigger a github workflow which will publish a new helm chart. This pipeline should run after the upstream jenkins pipeline finishes. The workflow in the Jenkinsfile should be used as an upstream for argocd')
                 displayName('helm charts')
-                quietPeriod(60)
+                quietPeriod(5)
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/helm-charts')
                   pipelineTriggers {
@@ -471,7 +513,7 @@ controller:
               pipelineJob('argocd') {
                 description('nginx and helm-charts should be upstream jobs for argocd. argcocd github repo webhook')
                 displayName('continuous deployment')
-                quietPeriod(60)
+                quietPeriod(5)
                 properties {
                   githubProjectUrl('https://github.com/robinmordasiewicz/argocd')
                   pipelineTriggers {
@@ -486,33 +528,6 @@ controller:
                       git {
                         remote {
                           url('https://github.com/robinmordasiewicz/argocd.git')
-                        }
-                        branch('main')
-                        extensions {}
-                      }
-                    }
-                  }
-                }
-              }
-          - script: >
-              pipelineJob('nginx') {
-                displayName('nginx/html container')
-                description('This nginx container has the markdown rendered as html embedded inside.')
-                quietPeriod(60)
-                properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/nginx')
-                  pipelineTriggers {
-                      triggers {
-                        githubPush()
-                      }
-                   }
-                }
-                definition {
-                  cpsScm {
-                    scm {
-                      git {
-                        remote {
-                          url('https://github.com/robinmordasiewicz/nginx.git')
                         }
                         branch('main')
                         extensions {}
