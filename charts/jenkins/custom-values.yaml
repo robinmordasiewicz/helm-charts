@@ -40,12 +40,12 @@ controller:
               name: "git"
         jobs:
           - script: >
-              pipelineJob('contentascode') {
-                description('Content As Code')
-                displayName('Content As Code')
+              pipelineJob('nginx') {
+                description('nginx')
+                displayName('nginx')
                 quietPeriod(5)
                 properties {
-                  githubProjectUrl('https://github.com/robinmordasiewicz/contentascode')
+                  githubProjectUrl('https://github.com/robinmordasiewicz/nginx')
                   pipelineTriggers {
                       triggers {
                         githubPush()
@@ -57,7 +57,7 @@ controller:
                     scm {
                       git {
                         remote {
-                          url('https://github.com/robinmordasiewicz/termi.git')
+                          url('https://github.com/robinmordasiewicz/nginx.git')
                         }
                         branch('main')
                         extensions {}
