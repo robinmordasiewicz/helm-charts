@@ -25,6 +25,8 @@ controller:
           gitSCM:
             globalConfigEmail: "robin@mordasiewicz.com"
             globalConfigName: "robinmordasiewicz"
+          location:
+            url: http://robin-jenkins.amer.myedgedemo.com/:8080/
         jenkins:
           systemMessage: "JCasC Version: 3.11.8-300"
         tool:
