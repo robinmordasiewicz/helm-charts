@@ -33,12 +33,33 @@ controller:
             - home: "/usr/bin/git"
               name: "git"
         jobs:
-        tool:
-          git:
-            installations:
-            - home: "/usr/bin/git"
-              name: "git"
-        jobs:
+          - script: >
+              pipelineJob('puppeteer') {
+                description('Screen Recording')
+                displayName('puppeteer')
+                quietPeriod(5)
+                properties {
+                  githubProjectUrl('https://github.com/robinmordasiewicz/puppeteer')
+                  pipelineTriggers {
+                      triggers {
+                        githubPush()
+                      }
+                   }
+                }
+                definition {
+                  cpsScm {
+                    scm {
+                      git {
+                        remote {
+                          url('https://github.com/robinmordasiewicz/puppeteer.git')
+                        }
+                        branch('main')
+                        extensions {}
+                      }
+                    }
+                  }
+                }
+              }
           - script: >
               pipelineJob('nginx') {
                 description('nginx')
