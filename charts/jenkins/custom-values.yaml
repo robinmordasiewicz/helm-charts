@@ -2,8 +2,8 @@ clusterZone: "mordasiewicz.local"
 controller:
   jenkinsAdminEmail: r.mordasiewicz@f5.com
   image: "robinhoodis/jenkins"
-  tag: "2.332.3-87"
-  tagLabel: 2.332.3-87
+  tag: "2.346.1-89"
+  tagLabel: 2.346.1-89
   resources:
     requests:
       cpu: "100m"
@@ -28,7 +28,7 @@ controller:
           location:
             url: http://robin-jenkins.amer.myedgedemo.com/:8080/
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-300"
+          systemMessage: "JCasC Version: 3.11.8-301"
         tool:
           git:
             installations:
