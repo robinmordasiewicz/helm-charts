@@ -28,7 +28,7 @@ controller:
           location:
             url: http://robin-jenkins.amer.myedgedemo.com/:8080/
         jenkins:
-          systemMessage: "JCasC Version: 3.11.8-301"
+          systemMessage: "JCasC Version: 3.11.8-302"
         tool:
           git:
             installations:
